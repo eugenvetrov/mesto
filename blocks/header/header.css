@@ -4,8 +4,8 @@
     border-bottom: #545454 1px solid;
 }
 
-@media screen and (max-width: 879px) {
+@media screen and (max-width: 900px) {
     .header {
-    min-width: 100vw;
+    min-width: 100%;
     }
 }

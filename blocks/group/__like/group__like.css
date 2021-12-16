@@ -1,0 +1,10 @@
+.group__like {
+    background-image: url(../../../images/like.svg);
+    background-repeat: no-repeat;
+    background-color: #fff;
+    background-position: top 30px right 20px;
+    border: none;
+    grid-area: like;
+    margin: 0;
+    padding: 0;
+}
