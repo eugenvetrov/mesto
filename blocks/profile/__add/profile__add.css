@@ -1,0 +1,19 @@
+.profile__add {
+    width: 150px;
+    height: 50px;
+    border: none;
+    background-color: #000;
+    background-image: url(../../../images/add-btn.svg);
+    object-fit: contain;
+    grid-area: add;
+    justify-self: flex-end;
+    align-self: center;
+}
+
+@media screen and (max-width: 900px) {
+    .profile__add{
+    justify-self: center;
+    width: 282px;
+    background-image: url(../../../images/add-btn-mobile.svg);
+    }
+}
