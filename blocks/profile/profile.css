@@ -17,7 +17,7 @@
                          "add add";
     grid-template-rows: 120px max-content max-content 50px;
     grid-template-columns: auto;
-    max-width: 100%;
+    max-width: 282px;
     justify-items: center;
     }
 }
