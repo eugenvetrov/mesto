@@ -12,7 +12,9 @@ editButton.addEventListener("click", () => {
 profileEditSubmit.addEventListener("click", (event) => {
 	event.preventDefault();
     profileName.textContent = editProfileName.value;
+	profileName.title = editProfileName.value;
 	profileDescription.textContent = editProfileDescription.value;
+	profileDescription.title = editProfileDescription.value;
 	popup.classList.remove("popup_opened");
 });
 popupClose.addEventListener("click", (event) => {

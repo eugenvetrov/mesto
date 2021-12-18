@@ -14,5 +14,8 @@
 @media screen and (max-width: 900px) {
     .profile__info-edit{
         margin: 0 0 0.42em 0;
+        background-image: url(../../../images/edit-btn-mobile.svg);
+        width: 18px;
+        height: 18px;
     }
 }
