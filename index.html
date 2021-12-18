@@ -14,14 +14,14 @@
     <section class="profile">
         <img src="./images/jacques-yves-cousteau.jpeg" class="profile__avatar" alt="аватар профиля">
         <h1 class="profile__info-name">Жак Ив Кусто</h1>
-        <button class="profile__info-edit" onclick="popUpForEditProfile()"></button>
+        <button class="profile__info-edit"></button>
         <div class="popup">
             <form class="popup__container">
-                <button class="popup__close-icon" onclick="popUpCloseEdit()"><img src="./images/close-icon.png" alt="закрыть редактирование профиля"></button>
+                <button class="popup__close-icon"><img src="./images/close-icon.png" alt="закрыть редактирование профиля"></button>
                 <p class="popup__title">Редактировать профиль</p>
                 <input class="popup__name" type="text" value="Жак Ив Кусто">
                 <input class="popup__description" type="text" value="Исследователь океана">
-                <input class="popup__submit" type="submit" value="Сохранить" onclick="popUpForSubmitProfile()">
+                <input class="popup__submit" type="submit" value="Сохранить">
             </form>
         </div>
         <p class="profile__info-description">Исследователь океана</p>
@@ -62,5 +62,6 @@
     <footer class="footer">
         &copy; 2020 Mesto Russia
     </footer>
+    <script src="./scripts/popup.js"></script>
 </body>
 </html>
