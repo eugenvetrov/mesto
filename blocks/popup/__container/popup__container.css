@@ -3,13 +3,13 @@
     display: flex;
     flex-direction: column;
     width: 430px;
-    height: 362px;
+    min-height: 362px;
     border-radius: 10px;
 }
 
 @media screen and (max-width: 900px){
     .popup__container {
     width: 282px;
-    height: 368px;
+    min-height: 368px;
     }
 }

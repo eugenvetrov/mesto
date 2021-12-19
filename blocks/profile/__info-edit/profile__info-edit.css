@@ -2,7 +2,7 @@
     background-color: #000;
     border: none;
     width: 24px;
-    height: 24px;
+    min-height: 24px;
     align-self: flex-end;
     object-fit: contain;
     background-image: url(../../../images/edit-btn.svg);
@@ -21,6 +21,6 @@
         margin: 0 0 0.42em 0;
         background-image: url(../../../images/edit-btn-mobile.svg);
         width: 18px;
-        height: 18px;
+        min-height: 18px;
     }
 }

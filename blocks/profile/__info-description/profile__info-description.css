@@ -2,7 +2,7 @@
     grid-area: info-description;
     font-weight: 400;
     font-size: 18px;
-    line-height: 21.78px;
+    line-height: 22px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -12,7 +12,7 @@
 
 @media screen and (max-width: 900px) {
     .profile__info-description{
-    line-height: 16.94px;
+    line-height: 17px;
     font-size: 14px;
     margin: 14px auto 36px auto;
     max-width: 282px;

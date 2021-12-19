@@ -1,6 +1,5 @@
 const likeIcon = document.querySelectorAll(".group__like-icon");
 Array.from(likeIcon).forEach((element, i) => {
-    console.log(likeIcon[i].src)
     likeIcon[i].addEventListener("click", (event) => {
         if (likeIcon[i].getAttribute("src") == "./images/like.svg"){
             likeIcon[i].setAttribute("src", "./images/like-active.svg");
