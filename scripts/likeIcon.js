@@ -5,8 +5,8 @@ Array.from(likeIcon).forEach((element, i) => {
             likeIcon[i].setAttribute("src", "./images/like-active.svg");
             likeIcon[i].classList.add("group__like-icon_active");
         } else if (likeIcon[i].getAttribute("src") == "./images/like-active.svg") {
-            likeIcon[i].setAttribute("src", "./images/like.svg");
             likeIcon[i].classList.remove("group__like-icon_active");
+            likeIcon[i].setAttribute("src", "./images/like.svg");
         }
     }
     );
