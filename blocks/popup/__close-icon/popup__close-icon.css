@@ -9,6 +9,11 @@
     background-image: url(../../../images/close-icon.png);
 }
 
+.popup__close-icon:hover {
+    opacity: .6;
+    cursor: pointer;
+}
+
 @media screen and (max-width: 900px){
     .popup__close-icon {
         width: 20px;

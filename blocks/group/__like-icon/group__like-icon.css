@@ -1,0 +1,9 @@
+.group__like-icon {
+    width: 22px;
+    height: 19px;
+}
+
+.group__like-icon:hover {
+    opacity: .5;
+    cursor: pointer;
+}

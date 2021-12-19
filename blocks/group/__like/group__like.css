@@ -1,5 +1,5 @@
 .group__like {
-    background-image: url(../../../images/like.svg);
+    display: flex;
     background-repeat: no-repeat;
     background-color: #fff;
     background-position: top 30px right 20px;
@@ -7,4 +7,6 @@
     grid-area: like;
     margin: 0;
     padding: 0;
+    align-items: center;
+    justify-content: flex-start;
 }

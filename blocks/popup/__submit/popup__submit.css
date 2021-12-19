@@ -8,6 +8,11 @@
     border-radius: 2px;
 }
 
+.popup__submit:hover {
+    opacity: .8;
+    cursor: pointer;
+}
+
 @media screen and (max-width: 900px){
     .popup__submit {
         width: 238px;

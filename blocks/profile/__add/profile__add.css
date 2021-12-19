@@ -10,6 +10,11 @@
     align-self: center;
 }
 
+.profile__add:hover {
+    opacity: .6;
+    cursor: pointer;
+}
+
 @media screen and (max-width: 900px) {
     .profile__add{
     justify-self: center;
