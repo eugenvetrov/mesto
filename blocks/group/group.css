@@ -10,6 +10,6 @@
 @media screen and (max-width: 900px) {
     .group {
         grid-template-columns: 282px;
-        width: 100%
+        width: 100%;
     }
 }
