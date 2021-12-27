@@ -17,17 +17,17 @@
 @import url(../blocks/group/__image/group__image.css);
 @import url(../blocks/group/__like/group__like.css);
 @import url(../blocks/group/__like-icon/group__like-icon.css);
-@import url(../blocks/group/__like-icon/_active/group__like-icon_active.css);
 @import url(../blocks/group/__name/group__name.css);
 @import url(../blocks/group/__rectangle/group__rectangle.css);
 
 @import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__copy/footer__copy.css);
 
 @import url(../blocks//popup/popup.css);
 @import url(../blocks/popup/__container/popup__container.css);
-@import url(../blocks/popup/__description/popup__description.css);
-@import url(../blocks/popup/__name/popup__name.css);
+@import url(../blocks/popup/__text/popup__text.css);
 @import url(../blocks/popup/__submit/popup__submit.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/popup/__title/popup__title.css);
 @import url(../blocks/popup/__close-icon/popup__close-icon.css);
+@import url(../blocks/popup/__form/popup__form.css);

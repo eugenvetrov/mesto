@@ -3,9 +3,10 @@
     width: 358px;
     min-height: 50px;
     color: #fff;
-    margin: 48px auto 0 auto;
+    margin: 48px auto 37px auto;
     border: none;
     border-radius: 2px;
+    padding: 0;
 }
 
 .popup__submit:hover {
@@ -15,6 +16,7 @@
 
 @media screen and (max-width: 900px){
     .popup__submit {
+        margin-bottom: 25px;
         width: 238px;
         min-height: 46px;
         margin-top: 45px;

@@ -1,12 +1,14 @@
 .popup__close-icon {
     position: relative;
     background: none;
+    margin: 0;
     width: 32px;
     min-height: 32px;
-    top: -32px;
+    top: -8px;
     left: 430px;
     border: none;
-    background-image: url(../../../images/close-icon.png);
+    background-image: url(../../../images/close-icon.svg);
+    background-size: cover;
 }
 
 .popup__close-icon:hover {
@@ -18,8 +20,7 @@
     .popup__close-icon {
         width: 20px;
         min-height: 20px;
-        top: -36px;
+        top: -8px;
         left: 262px;
-        background-image: url(../../../images/close-icon-mobile.png);
     }
 }

@@ -11,58 +11,61 @@
     <header class="header">
         <img src="images/logo-white.svg" class="header__logo" alt="Место Россия логотип">
     </header>
+    <main class="main">
     <section class="profile">
         <img src="./images/jacques-yves-cousteau.jpeg" class="profile__avatar" alt="аватар профиля">
         <h1 class="profile__info-name">Жак Ив Кусто</h1>
         <button class="profile__info-edit"></button>
-        <div class="popup">
-            <form class="popup__container">
-                <button class="popup__close-icon"></button>
-                <p class="popup__title">Редактировать профиль</p>
-                <input class="popup__name" type="text" value="Жак Ив Кусто">
-                <input class="popup__description" type="text" value="Исследователь океана">
-                <input class="popup__submit" type="submit" value="Сохранить">
-            </form>
-        </div>
         <p class="profile__info-description">Исследователь океана</p>
         <button class="profile__add"></button>
     </section>
+    <div class="popup">
+        <div class="popup__container">
+            <button class="popup__close-icon"></button>
+            <form class="popup__form" name="profile-form">
+                <h2 class="popup__title">Редактировать профиль</h2>
+                <input class="popup__text" type="text" name="profile-form-name" value="Жак Ив Кусто">
+                <input class="popup__text" type="text" name="profile-form-description" value="Исследователь океана">
+                <input class="popup__submit" type="submit" value="Сохранить">
+            </form>
+        </div>
+    </div>
     <section class="group">
         <article class="group__rectangle">
             <img src="./images/respublika_comi.jpg" class="group__image" alt="Республика Коми">
-            <p class="group__name" title="Республика Коми">Республика Коми</p>
+            <h2 class="group__name" title="Республика Коми">Республика Коми</h2>
             <button class="group__like"><img class="group__like-icon" src="./images/like.svg" alt="Отметить как понравившееся"></button>
         </article>
         <article class="group__rectangle">
             <img src="./images/baikal-lake.jpg" class="group__image" alt="Озеро Байкал">
-            <p class="group__name" title="Озеро Байкал">Озеро Байкал</p>
+            <h2 class="group__name" title="Озеро Байкал">Озеро Байкал</h2>
             <button class="group__like"><img class="group__like-icon" src="./images/like.svg" alt="Отметить как понравившееся"></button>
         </article>
         <article class="group__rectangle">
             <img src="./images/kamchatka.jpg" class="group__image" alt="Камчатка">
-            <p class="group__name" title="Камчатка">Камчатка</p>
+            <h2 class="group__name" title="Камчатка">Камчатка</h2>
             <button class="group__like"><img class="group__like-icon" src="./images/like.svg" alt="Отметить как понравившееся"></button>
         </article>
         <article class="group__rectangle">
             <img src="./images/onega-lake.jpg" class="group__image" alt="Онежское озеро">
-            <p class="group__name" title="Онежское озеро">Онежское озеро</p>
+            <h2 class="group__name" title="Онежское озеро">Онежское озеро</h2>
             <button class="group__like"><img class="group__like-icon" src="./images/like.svg" alt="Отметить как понравившееся"></button>
         </article>
         <article class="group__rectangle">
             <img src="./images/park-monrepo.jpg" class="group__image" alt="Парк Монрепо">
-            <p class="group__name" title="Парк Монрепо">Парк Монрепо</p>
+            <h2 class="group__name" title="Парк Монрепо">Парк Монрепо</h2>
             <button class="group__like"><img class="group__like-icon" src="./images/like.svg" alt="Отметить как понравившееся"></button>
         </article>
         <article class="group__rectangle">
             <img src="./images/tulinovka.jpg" class="group__image" alt="Тулиновка">
-            <p class="group__name" title="Тулиновка">Тулиновка</p>
+            <h2 class="group__name" title="Тулиновка">Тулиновка</h2>
             <button class="group__like"><img class="group__like-icon" src="./images/like.svg" alt="Отметить как понравившееся"></button>
         </article>
     </section>
+    </main>
     <footer class="footer">
-        &copy; 2020 Mesto Russia
+        <p class="footer__copy">&copy; 2020 Mesto Russia</p>
     </footer>
     <script src="./scripts/popup.js"></script>
-    <script src="./scripts/likeIcon.js"></script>
 </body>
 </html>

@@ -1,9 +1,9 @@
-.popup__description {
+.popup__text {
     display: flex;
-    border-width: 0 0 1px 0;
-    border-bottom: solid rgba(0, 0, 0, .2);
+    border-width: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, .2);
     width: 358px;
-    margin: 30px auto 0 auto;
+    margin: 0 auto 0;
     font-weight: 400;
     font-size: 14px;
     line-height: 27px;
@@ -12,8 +12,13 @@
     overflow: hidden;
 }
 
+.popup__text:nth-of-type(1){
+    margin-bottom: 30px;
+}
+
 @media screen and (max-width: 900px){
-    .popup__description {
+    .popup__text{
         width: 238px;
+        line-height: 30px;
     }
 }
