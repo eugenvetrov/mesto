@@ -20,36 +20,15 @@
         <button class="profile__add" type="button"></button>
     </section>
     <section class="group">
-        <article class="group__rectangle">
-            <img src="./images/respublika_comi.jpg" class="group__image" alt="Республика Коми">
-            <h2 class="group__name" title="Республика Коми">Республика Коми</h2>
-            <button class="group__like" type="button"><img class="group__like-icon" src="./images/like.svg" alt="Отметить как понравившееся"></button>
-        </article>
-        <article class="group__rectangle">
-            <img src="./images/baikal-lake.jpg" class="group__image" alt="Озеро Байкал">
-            <h2 class="group__name" title="Озеро Байкал">Озеро Байкал</h2>
-            <button class="group__like" type="button"><img class="group__like-icon" src="./images/like.svg" alt="Отметить как понравившееся"></button>
-        </article>
-        <article class="group__rectangle">
-            <img src="./images/kamchatka.jpg" class="group__image" alt="Камчатка">
-            <h2 class="group__name" title="Камчатка">Камчатка</h2>
-            <button class="group__like" type="button"><img class="group__like-icon" src="./images/like.svg" alt="Отметить как понравившееся"></button>
-        </article>
-        <article class="group__rectangle">
-            <img src="./images/onega-lake.jpg" class="group__image" alt="Онежское озеро">
-            <h2 class="group__name" title="Онежское озеро">Онежское озеро</h2>
-            <button class="group__like" type="button"><img class="group__like-icon" src="./images/like.svg" alt="Отметить как понравившееся"></button>
-        </article>
-        <article class="group__rectangle">
-            <img src="./images/park-monrepo.jpg" class="group__image" alt="Парк Монрепо">
-            <h2 class="group__name" title="Парк Монрепо">Парк Монрепо</h2>
-            <button class="group__like" type="button"><img class="group__like-icon" src="./images/like.svg" alt="Отметить как понравившееся"></button>
-        </article>
-        <article class="group__rectangle">
-            <img src="./images/tulinovka.jpg" class="group__image" alt="Тулиновка">
-            <h2 class="group__name" title="Тулиновка">Тулиновка</h2>
-            <button class="group__like" type="button"><img class="group__like-icon" src="./images/like.svg" alt="Отметить как понравившееся"></button>
-        </article>
+        <template id="group__cards">
+            <article class="group__rectangle">
+                <img class="group__image">
+                <h2 class="group__name"></h2>
+                <button class="group__like" type="button">
+                    <img class="group__like-icon" src="./images/like.svg" alt="Отметить как понравившееся">
+                </button>
+            </article>
+        </template>
     </section>
     </main>
     <div class="popup">
@@ -66,6 +45,9 @@
     <footer class="footer">
         <p class="footer__copy">&copy; 2020 Mesto Russia</p>
     </footer>
+    <script src="./scripts/initialCards.js"></script>
     <script src="./scripts/popup.js"></script>
+    <script src="./scripts/makeCard.js"></script>
+    <script src="./scripts/renderInitialCards.js"></script>
 </body>
 </html>
