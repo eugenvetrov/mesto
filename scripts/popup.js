@@ -1,34 +1,85 @@
-const editButton = document.querySelector(".profile__info-edit");
-const popup = document.querySelector(".popup");
-const profileEditSubmit = document.querySelector(".popup__form");
-let editProfileName = document.querySelector(".popup__text:nth-of-type(1)");
-let editProfileDescription = document.querySelector(".popup__text:nth-of-type(2)");
-/* Выполнил поиск по сложным селекторам, так как в ревью отмечено, 
-что класс должен быть одинаковым. Если необходимо
-создать модификаторы для полей в классах, готов переделать */
-let profileName = document.querySelector(".profile__info-name");
-let profileDescription = document.querySelector(".profile__info-description");
-const popupClose = document.querySelector(".popup__close-icon")
-
-const openPopup = () => {
-	popup.classList.add("popup_opened");
-	editProfileName.value = profileName.textContent;
-	editProfileDescription.value = profileDescription.textContent;
+function openPopup(kindOfPopup) {
+	kindOfPopup.classList.add("popup_opened");
 }
 
-const closePopup = () => {
-	popup.classList.remove("popup_opened");
+function closePopup (kindOfPopup) {
+	kindOfPopup.classList.remove("popup_opened");
 }
 
-const editProfilePopup = (event) => {
-	event.preventDefault();
-    profileName.textContent = editProfileName.value
-	profileDescription.textContent = editProfileDescription.value
-	closePopup();
+function profilePopup() {
+
+    const editButton = document.querySelector(".profile__info-edit");
+    const popupProfile = document.querySelectorAll(".popup")[0];
+    const profileEditSubmit = document.querySelectorAll(".popup__form")[0];
+    const editProfileName = document.querySelectorAll(".popup__text:nth-of-type(1)")[0];
+    const editProfileDescription = document.querySelectorAll(".popup__text:nth-of-type(2)")[0];
+    const profileName = document.querySelectorAll(".profile__info-name")[0];
+    const profileDescription = document.querySelectorAll(".profile__info-description")[0];
+    const popupCloseProfile = document.querySelectorAll(".popup__close-icon")[0];
+
+    function openProfilePopup() {
+    	openPopup(popupProfile);
+    	editProfileName.value = profileName.textContent;
+    	editProfileDescription.value = profileDescription.textContent;
+    }
+    
+    function closePopupProfile() {
+    	closePopup(popupProfile);
+    }
+    
+    const editProfilePopup = (event) => {
+    	event.preventDefault();
+        profileName.textContent = editProfileName.value
+    	profileDescription.textContent = editProfileDescription.value
+    	closePopup(popupProfile);
+    }
+    
+        editButton.addEventListener("click", openProfilePopup);
+        profileEditSubmit.addEventListener("submit", editProfilePopup);
+        popupCloseProfile.addEventListener("click", closePopupProfile);
+
 }
 
-editButton.addEventListener("click", openPopup);
+function cardPopup() {
 
-profileEditSubmit.addEventListener("submit", editProfilePopup);
+	const addButton = document.querySelector(".profile__add");
+	const popupCard = document.querySelectorAll(".popup")[1];
+	const cardAddSubmit = document.querySelectorAll(".popup__form")[1];
+	const cardName = document.querySelectorAll(".popup__text:nth-of-type(1)")[1];
+	const cardLink = document.querySelectorAll(".popup__text:nth-of-type(2)")[1];
+	const popupCloseCard = document.querySelectorAll(".popup__close-icon")[1];
 
-popupClose.addEventListener("click", closePopup)
+    function openCardPopup() {
+		openPopup(popupCard);
+	}
+
+	function closePopupCard() {
+		closePopup(popupCard);
+	}
+
+	function addCard(event) {
+		event.preventDefault();
+		newItem = {
+			name: cardName.value, 
+			link: cardLink.value
+		}
+		initialCards.unshift(newItem);
+		console.log(initialCards[0])
+		group.prepend(makeCard(initialCards[0].link, initialCards[0].name));
+		closePopupCard();
+	}
+
+	addButton.addEventListener("click", openCardPopup);
+    popupCloseCard.addEventListener("click", closePopupCard);
+    cardAddSubmit.addEventListener("submit", addCard);
+}
+
+profilePopup();
+cardPopup();
+
+
+
+
+
+
+
