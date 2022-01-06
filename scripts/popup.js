@@ -64,8 +64,8 @@ function cardPopup() {
 			link: cardLink.value
 		}
 		initialCards.unshift(newItem);
-		console.log(initialCards[0])
 		group.prepend(makeCard(initialCards[0].link, initialCards[0].name));
+		like(0)
 		closePopupCard();
 	}
 
@@ -76,10 +76,3 @@ function cardPopup() {
 
 profilePopup();
 cardPopup();
-
-
-
-
-
-
-
