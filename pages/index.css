@@ -20,6 +20,7 @@
 @import url(../blocks/group/__like-icon/_active/group__like-icon_active.css);
 @import url(../blocks/group/__name/group__name.css);
 @import url(../blocks/group/__rectangle/group__rectangle.css);
+@import url(../blocks/group/__delete-icon/group__delete-icon.css);
 
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copy/footer__copy.css);
