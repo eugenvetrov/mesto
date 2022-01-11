@@ -27,7 +27,7 @@ const cardNameEdit = Array.prototype.slice.call(document.querySelectorAll(".popu
 const cardLinkEdit = Array.prototype.slice.call(document.querySelectorAll(".popup__text:nth-of-type(2)"))[1];
 const popupCloseCard = Array.prototype.slice.call(document.querySelectorAll(".popup__close-icon"))[1];
 
-console.log('group', group);
+/* Функции для карточек и лайков */
 
 const makeCard = (link, name) => {
     const card = cardContent.cloneNode(true);
@@ -64,7 +64,7 @@ const renderCard = (element, toBegin) => {
         likeToggler()
         renderLike()
     }
-    icon.addEventListener("click", () => likeListener())
+    icon.addEventListener("click", likeListener)
     if (toBegin) {
         const renderedCards = Array.prototype.slice.call(group.children);
         renderedCards[0].after(card);
