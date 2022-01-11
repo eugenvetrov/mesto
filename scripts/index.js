@@ -29,22 +29,22 @@ const popupCloseCard = Array.prototype.slice.call(document.querySelectorAll(".po
 
 console.log('group', group);
 
-function makeCard(link, name) {
+const makeCard = (link, name) => {
     const card = cardContent.cloneNode(true);
     card.querySelector('.group__image').src = link;
     card.querySelector('.group__name').textContent = name;
     return card;
 }
 
-function deleteCard() {
+const deleteCard = () => {
     console.log("delete card");
 }
 
-function renderCards() {
+const renderCards = () => {
     cardsArray.forEach((element) => renderCard(element))
 }
 
-function renderCard(element, toBegin) {
+const renderCard = (element, toBegin) => {
     const card = makeCard(element.link, element.name)
     console.log({card});
     const icon = card.querySelector(".group__like-icon")
@@ -73,36 +73,33 @@ function renderCard(element, toBegin) {
     }
 }
 
-renderCards();
-debugger
-
 /* Функции для попапов */
 
-function openPopup(kindOfPopup) {
+const openPopup = (kindOfPopup) => {
     kindOfPopup.classList.add("popup_opened");
 }
 
-function closePopup (kindOfPopup) {
+const closePopup = (kindOfPopup) => {
     kindOfPopup.classList.remove("popup_opened");
 }
 
-function profilePopup() {
+const profilePopup = () => {
 
-    function openProfilePopup() {
+    const openProfilePopup = () => {
         openPopup(popupProfile);
         popupEditProfileName.value = profileName.textContent;
         popupEditProfileDescription.value = profileDescription.textContent;
     }
     
-    function closePopupProfile() {
-        popup.closePopup(popupProfile);
+    const closePopupProfile = () => {
+        closePopup(popupProfile);
     }
     
     const editProfilePopup = (event) => {
         event.preventDefault();
-        profileName.textContent = popupEditProfileName.value
-        profileDescription.textContent = popupEditProfileDescription.value
-        popup.closePopup(popupProfile);
+        profileName.textContent = popupEditProfileName.value;
+        profileDescription.textContent = popupEditProfileDescription.value;
+        closePopup(popupProfile);
     }
     
 editButton.addEventListener("click", openProfilePopup);
@@ -112,17 +109,19 @@ popupCloseProfile.addEventListener("click", closePopupProfile);
 }
 
 
-function cardPopup() {
+const cardPopup = () => {
     
-    function openCardPopup() {
+    const openCardPopup = () => {
         openPopup(popupCard);
+        cardNameEdit.value = '';
+        cardLinkEdit.value = '';
     }
 
-    function closePopupCard() {
+    const closePopupCard = () => {
         closePopup(popupCard);
     }
 
-    function addCard(event) {
+    const addCard = (event) => {
         event.preventDefault();
         newItem = {
             name: cardNameEdit.value, 
@@ -130,11 +129,8 @@ function cardPopup() {
             like: false
         }
         cardsArray.unshift(newItem);
-        console.log(cardsArray)
-        renderCard(cardsArray[0], true)
-        debugger
+        renderCard(cardsArray[0], true);
         closePopupCard();
-        debugger
     }
 
 addButton.addEventListener("click", openCardPopup);
@@ -142,7 +138,8 @@ cardAddSubmit.addEventListener("submit", addCard);
 popupCloseCard.addEventListener("click", closePopupCard);
 }
 
-profilePopup()
-cardPopup()
+profilePopup();
+cardPopup();
+renderCards();
 
 
