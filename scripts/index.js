@@ -36,35 +36,38 @@ const makeCard = (link, name) => {
     return card;
 }
 
-const deleteCard = () => {
-    console.log("delete card");
-}
-
 const renderCards = () => {
-    cardsArray.forEach((element) => renderCard(element))
+    cardsArray.forEach((element) => renderCard(element));
 }
 
 const renderCard = (element, toBegin) => {
-    const card = makeCard(element.link, element.name)
-    console.log({card});
-    const icon = card.querySelector(".group__like-icon")
+    const card = makeCard(element.link, element.name);
+    const likeIcon = card.querySelector(".group__like-icon");
+    const trashIcon = card.querySelector(".group__delete-icon");
+    const readyCard = card.querySelector(".group__rectangle")
     const likeToggler = () => {
-        element.like = !element.like
+        element.like = !element.like;
     }
     const renderLike = () => {
         if (element.like == true) {
-            icon.setAttribute("src", "./images/like-active.svg")
-            icon.classList.add("group__like-icon_active")
+            likeIcon.setAttribute("src", "./images/like-active.svg");
+            likeIcon.classList.add("group__like-icon_active");
         } else if (element.like == false){
-            icon.setAttribute("src", "./images/like.svg")
-            icon.classList.remove("group__like-icon_active")
+            likeIcon.setAttribute("src", "./images/like.svg");
+            likeIcon.classList.remove("group__like-icon_active");
         }
     }
     const likeListener = () => {
-        likeToggler()
-        renderLike()
+        likeToggler();
+        renderLike();
     }
-    icon.addEventListener("click", likeListener)
+    const deleteCard = () => {
+        index = cardsArray.indexOf(element);
+        cardsArray.splice(index, 1);
+        readyCard.remove(element);
+    }
+    likeIcon.addEventListener("click", likeListener);
+    trashIcon.addEventListener("click", deleteCard);
     if (toBegin) {
         const renderedCards = Array.prototype.slice.call(group.children);
         renderedCards[0].after(card);
