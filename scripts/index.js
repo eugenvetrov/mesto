@@ -29,10 +29,6 @@ const popupCloseCard = Array.prototype.slice.call(document.querySelectorAll(".po
 
 console.log('group', group);
 
-function getRenderedCards(){
-    return Array.prototype.slice.call(group.children);
-}
-
 function makeCard(link, name) {
     const card = cardContent.cloneNode(true);
     card.querySelector('.group__image').src = link;
@@ -45,60 +41,36 @@ function deleteCard() {
 }
 
 function renderCards() {
-    cardsArray.forEach((element, i) => renderCardToEnd(element, i))
+    cardsArray.forEach((element) => renderCard(element))
 }
 
-function renderCardToEnd(element, i) {
-    console.log(element);
-    group.append(makeCard(element.link, element.name));
-    setLikeListener(element, i)
-}
-
-function renderCardToBegin() {
-    const renderedCards = getRenderedCards()
-    renderedCards[0].after(makeCard(cardsArray[0].link, cardsArray[0].name));
-    setLikeListener(0)
-}
-
-function likeIconsGet() {
-    return Array.prototype.slice.call(document.querySelectorAll(".group__like-icon"));
-}
-
-function likeListenerToggler(index) {
-    console.log(index);
-    if(cardsArray[index].like == true) {
-        cardsArray[index].like = false;
-    } else if (cardsArray[index].like == false) {
-        cardsArray[index].like = true;
+function renderCard(element, toBegin) {
+    const card = makeCard(element.link, element.name)
+    console.log({card});
+    const icon = card.querySelector(".group__like-icon")
+    const likeToggler = () => {
+        element.like = !element.like
     }
-    console.log(cardsArray);
-}
-
-function renderLikeOfCard(index, likeIcons) {
-    console.log(index);
-    console.log(likeIcons);
-    if (cardsArray[index].like == true) {
-        likeIcons[index].setAttribute("src", "./images/like-active.svg")
-        likeIcons[index].classList.add("group__like-icon_active")
-        console.log(likeIcons[index]);
-    } else if (cardsArray[index].like == false){
-        likeIcons[index].setAttribute("src", "./images/like.svg")
-        likeIcons[index].classList.remove("group__like-icon_active")
+    const renderLike = () => {
+        if (element.like == true) {
+            icon.setAttribute("src", "./images/like-active.svg")
+            icon.classList.add("group__like-icon_active")
+        } else if (element.like == false){
+            icon.setAttribute("src", "./images/like.svg")
+            icon.classList.remove("group__like-icon_active")
+        }
     }
-}
-
-function setLikeListener(el, index) {
-    const likeIcons = Array.prototype.slice.call(document.querySelectorAll(".group__like-icon"));
-    console.log(likeIcons);
-    likeIcons[index].addEventListener("click", () => {
-        console.log(index);
-        likeListener(index, likeIcons)}
-    )
-}
-
-function likeListener(index, likeIcons) {
-        likeListenerToggler(index)
-        renderLikeOfCard(index, likeIcons)
+    const likeListener = () => {
+        likeToggler()
+        renderLike()
+    }
+    icon.addEventListener("click", () => likeListener())
+    if (toBegin) {
+        const renderedCards = Array.prototype.slice.call(group.children);
+        renderedCards[0].after(card);
+    } else {
+    group.append(card);
+    }
 }
 
 renderCards();
@@ -159,7 +131,7 @@ function cardPopup() {
         }
         cardsArray.unshift(newItem);
         console.log(cardsArray)
-        renderCardToBegin()
+        renderCard(cardsArray[0], true)
         debugger
         closePopupCard();
         debugger
