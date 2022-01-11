@@ -4,7 +4,6 @@ const cardContent = cardTemplate.content;
 const cardAddSubmit = Array.prototype.slice.call(document.querySelectorAll(".popup__form"))[1];
 const group = document.querySelector(".group");
 const trashIcons = Array.prototype.slice.call(document.querySelectorAll(".group__delete-icon"));
-const renderedCards = Array.prototype.slice.call(document.querySelectorAll(".group__rectangle"));
 
 /* Переменные для базовых действий с попапами */
 const editButton = document.querySelector(".profile__info-edit");
@@ -28,6 +27,12 @@ const cardNameEdit = Array.prototype.slice.call(document.querySelectorAll(".popu
 const cardLinkEdit = Array.prototype.slice.call(document.querySelectorAll(".popup__text:nth-of-type(2)"))[1];
 const popupCloseCard = Array.prototype.slice.call(document.querySelectorAll(".popup__close-icon"))[1];
 
+console.log('group', group);
+
+function getRenderedCards(){
+    return Array.prototype.slice.call(group.children);
+}
+
 function makeCard(link, name) {
     const card = cardContent.cloneNode(true);
     card.querySelector('.group__image').src = link;
@@ -40,48 +45,64 @@ function deleteCard() {
 }
 
 function renderCards() {
-    cardsArray.forEach((cardData, index) => {
-        group.append(makeCard(cardData.link, cardData.name));
-      }
-      );
-      cardsArray.forEach((cardData, index) => {
-          likeListener(index)
-          renderLikeOfCard(index)
-      }
-      )
+    cardsArray.forEach((element, i) => renderCardToEnd(element, i))
 }
 
-function likeListenerToggler(index) {
-    if(cardsArray[index].like == true) {
-        cardsArray[index].like = false;
-        renderLikeOfCard(index)
-    } else if (cardsArray[index].like == false) {
-        cardsArray[index].like = true;
-        renderLikeOfCard(index)
-    }
+function renderCardToEnd(element, i) {
+    console.log(element);
+    group.append(makeCard(element.link, element.name));
+    setLikeListener(element, i)
+}
+
+function renderCardToBegin() {
+    const renderedCards = getRenderedCards()
+    renderedCards[0].after(makeCard(cardsArray[0].link, cardsArray[0].name));
+    setLikeListener(0)
 }
 
 function likeIconsGet() {
-    return document.querySelectorAll(".group__like-icon");
+    return Array.prototype.slice.call(document.querySelectorAll(".group__like-icon"));
 }
 
-function likeListener(index) {
-    const likeIcons = likeIconsGet()
-    likeIcons[index].addEventListener("click", () => likeListenerToggler(index))
+function likeListenerToggler(index) {
+    console.log(index);
+    if(cardsArray[index].like == true) {
+        cardsArray[index].like = false;
+    } else if (cardsArray[index].like == false) {
+        cardsArray[index].like = true;
+    }
+    console.log(cardsArray);
 }
 
-function renderLikeOfCard(index) {
-    const likeIcons = likeIconsGet()
+function renderLikeOfCard(index, likeIcons) {
+    console.log(index);
+    console.log(likeIcons);
     if (cardsArray[index].like == true) {
         likeIcons[index].setAttribute("src", "./images/like-active.svg")
         likeIcons[index].classList.add("group__like-icon_active")
+        console.log(likeIcons[index]);
     } else if (cardsArray[index].like == false){
         likeIcons[index].setAttribute("src", "./images/like.svg")
         likeIcons[index].classList.remove("group__like-icon_active")
     }
 }
 
+function setLikeListener(el, index) {
+    const likeIcons = Array.prototype.slice.call(document.querySelectorAll(".group__like-icon"));
+    console.log(likeIcons);
+    likeIcons[index].addEventListener("click", () => {
+        console.log(index);
+        likeListener(index, likeIcons)}
+    )
+}
+
+function likeListener(index, likeIcons) {
+        likeListenerToggler(index)
+        renderLikeOfCard(index, likeIcons)
+}
+
 renderCards();
+debugger
 
 /* Функции для попапов */
 
@@ -118,6 +139,7 @@ popupCloseProfile.addEventListener("click", closePopupProfile);
     
 }
 
+
 function cardPopup() {
     
     function openCardPopup() {
@@ -132,16 +154,23 @@ function cardPopup() {
         event.preventDefault();
         newItem = {
             name: cardNameEdit.value, 
-            link: cardLinkEdit.value
+            link: cardLinkEdit.value,
+            like: false
         }
         cardsArray.unshift(newItem);
-        group.prepend(makeCard(initialCards[0].link, initialCards[0].name));
+        console.log(cardsArray)
+        renderCardToBegin()
+        debugger
         closePopupCard();
+        debugger
     }
 
 addButton.addEventListener("click", openCardPopup);
 cardAddSubmit.addEventListener("submit", addCard);
 popupCloseCard.addEventListener("click", closePopupCard);
 }
+
+profilePopup()
+cardPopup()
 
 
