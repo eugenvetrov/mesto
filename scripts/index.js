@@ -8,12 +8,11 @@ const trashIcons = Array.prototype.slice.call(document.querySelectorAll(".group_
 /* Переменные для базовых действий с попапами */
 const editButton = document.querySelector(".profile__info-edit");
 const addButton = document.querySelector(".profile__add");
-const popups = Array.prototype.slice.call(document.querySelectorAll(".popup"));
 const popupForms = Array.prototype.slice.call(document.querySelectorAll(".popup__form"));        
 const popupCloseIcons = Array.prototype.slice.call(document.querySelectorAll(".popup__close-icon"));
 
 /* Переменные для редактирования профиля через попап */
-const popupProfile = popups[0];
+const popupProfile = Array.prototype.slice.call(document.querySelectorAll(".popup"))[1];
 const profileEditSubmit = popupForms[0];
 const popupEditProfileName = Array.prototype.slice.call(document.querySelectorAll(".popup__text:nth-of-type(1)"))[0];
 const popupEditProfileDescription = Array.prototype.slice.call(document.querySelectorAll(".popup__text:nth-of-type(2)"))[0];
