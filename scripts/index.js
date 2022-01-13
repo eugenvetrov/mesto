@@ -27,6 +27,12 @@ const cardNameEdit = Array.prototype.slice.call(document.querySelectorAll(".popu
 const cardLinkEdit = Array.prototype.slice.call(document.querySelectorAll(".popup__text:nth-of-type(2)"))[1];
 const popupCloseCard = Array.prototype.slice.call(document.querySelectorAll(".popup__close-icon"))[1];
 
+/* Переменные для попапа с большими изображениями из карт */
+const popupFullscreen = Array.prototype.slice.call(document.querySelectorAll(".popup"))[2];
+const popupCloseFullscreen = Array.prototype.slice.call(document.querySelectorAll(".popup__close-icon"))[2];
+const popupFullImage = document.querySelector(".popup__fullscreen-image");
+const popupFullImageCaption = document.querySelector(".popup__fullscreen-caption");
+
 /* Функции для карточек и лайков */
 
 const makeCard = (link, name) => {
@@ -42,9 +48,10 @@ const renderCards = () => {
 
 const renderCard = (element, toBegin) => {
     const card = makeCard(element.link, element.name);
+    const cardImage = card.querySelector(".group__image");
     const likeIcon = card.querySelector(".group__like-icon");
     const trashIcon = card.querySelector(".group__delete-icon");
-    const readyCard = card.querySelector(".group__rectangle")
+    const readyCard = card.querySelector(".group__rectangle");
     const likeToggler = () => {
         element.like = !element.like;
     }
@@ -62,12 +69,13 @@ const renderCard = (element, toBegin) => {
         renderLike();
     }
     const deleteCard = () => {
-        index = cardsArray.indexOf(element);
+        const index = cardsArray.indexOf(element);
         cardsArray.splice(index, 1);
         readyCard.remove(element);
     }
     likeIcon.addEventListener("click", likeListener);
-    trashIcon.addEventListener("click", deleteCard);
+    trashIcon.addEventListener("click", deleteCard);    
+    fullscreenPopup(cardImage, element.link, element.name)
     if (toBegin) {
         const renderedCards = Array.prototype.slice.call(group.children);
         renderedCards[0].after(card);
@@ -140,6 +148,26 @@ addButton.addEventListener("click", openCardPopup);
 cardAddSubmit.addEventListener("submit", addCard);
 popupCloseCard.addEventListener("click", closePopupCard);
 }
+
+const fullscreenPopup = (image, link, name) => {
+    const element = image;
+    const src = link;
+    const caption = name;
+    const openFullscreenPopup = (src, caption) => {
+        console.log(src, caption)
+        openPopup(popupFullscreen);
+        popupFullImage.src = src;
+        popupFullImageCaption.textContent = caption;
+    }
+    const closeFullscreenPopup = () => {
+        closePopup(popupFullscreen);
+    }
+    element.addEventListener("click", () => {
+        openFullscreenPopup(src, caption)
+    })
+    popupCloseFullscreen.addEventListener("click", closeFullscreenPopup);
+}
+
 
 profilePopup();
 cardPopup();
