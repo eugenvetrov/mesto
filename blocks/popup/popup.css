@@ -1,6 +1,6 @@
 .popup {
     display: flex;
-    visibility: hidden;
+    z-index: -1;
     opacity: 0;
     width: 100%;
     height: 100%;
@@ -9,5 +9,5 @@
     align-content: center;
     align-items: center;
     overflow: hidden;
-    transition: opacity .7s ease-out, visibility .7s ease-out;
+    transition: opacity .7s ease-out, z-index .7s ease-out;
 }
