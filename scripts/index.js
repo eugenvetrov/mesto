@@ -12,7 +12,7 @@ const popupForms = Array.prototype.slice.call(document.querySelectorAll(".popup_
 const popupCloseIcons = Array.prototype.slice.call(document.querySelectorAll(".popup__close-icon"));
 
 /* Переменные для редактирования профиля через попап */
-const popupProfile = Array.prototype.slice.call(document.querySelectorAll(".popup"))[1];
+const popupProfile = document.querySelectorAll(".popup")[0];
 const profileEditSubmit = popupForms[0];
 const popupEditProfileName = Array.prototype.slice.call(document.querySelectorAll(".popup__text:nth-of-type(1)"))[0];
 const popupEditProfileDescription = Array.prototype.slice.call(document.querySelectorAll(".popup__text:nth-of-type(2)"))[0];
@@ -21,13 +21,13 @@ const profileDescription = document.querySelector(".profile__info-description");
 const popupCloseProfile = popupCloseIcons[0];
 
 /* Переменные для добавления карт через попап*/
-const popupCard = Array.prototype.slice.call(document.querySelectorAll(".popup"))[1];
+const popupCard = document.querySelectorAll(".popup")[1];
 const cardNameEdit = Array.prototype.slice.call(document.querySelectorAll(".popup__text:nth-of-type(1)"))[1];
 const cardLinkEdit = Array.prototype.slice.call(document.querySelectorAll(".popup__text:nth-of-type(2)"))[1];
 const popupCloseCard = Array.prototype.slice.call(document.querySelectorAll(".popup__close-icon"))[1];
 
 /* Переменные для попапа с большими изображениями из карт */
-const popupFullscreen = Array.prototype.slice.call(document.querySelectorAll(".popup"))[2];
+const popupFullscreen = document.querySelectorAll(".popup")[2];
 const popupCloseFullscreen = Array.prototype.slice.call(document.querySelectorAll(".popup__close-icon"))[2];
 const popupFullImage = document.querySelector(".popup__fullscreen-image");
 const popupFullImageCaption = document.querySelector(".popup__fullscreen-caption");
@@ -153,7 +153,6 @@ const fullscreenPopup = (image, link, name) => {
     const src = link;
     const caption = name;
     const openFullscreenPopup = (src, caption) => {
-        console.log(src, caption)
         openPopup(popupFullscreen);
         popupFullImage.src = src;
         popupFullImageCaption.textContent = caption;

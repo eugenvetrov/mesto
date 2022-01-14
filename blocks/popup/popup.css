@@ -1,19 +1,13 @@
 .popup {
     display: flex;
-    transition: opacity .7s ease-out, z-index .7s ease-out;
+    visibility: hidden;
     opacity: 0;
-    background: rgba(0, 0, 0, 0.5);
     width: 100%;
     height: 100%;
     position: fixed;
     justify-content: center;
     align-content: center;
     align-items: center;
-    z-index: -1;
     overflow: hidden;
-}
-
-.popup + .popup_opened {
-    opacity: 1;
-    z-index: 10;
+    transition: opacity .7s ease-out, visibility .7s ease-out;
 }
