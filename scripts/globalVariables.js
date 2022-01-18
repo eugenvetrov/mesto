@@ -1,33 +1,33 @@
 /* Переменные для действий с картами */
 const cardTemplate = document.querySelector("#group__cards");
 const cardContent = cardTemplate.content;
-const cardAddSubmit = Array.prototype.slice.call(document.querySelectorAll(".popup__form"))[1];
+const cardAddSubmit = document.querySelector(".popup_card-add");
 const group = document.querySelector(".group");
-const trashIcons = Array.prototype.slice.call(document.querySelectorAll(".group__delete-icon"));
+const trashIcons = Array.from(document.querySelectorAll(".group__delete-icon"));
 
 /* Переменные для базовых действий с попапами */
 const editButton = document.querySelector(".profile__info-edit");
 const addButton = document.querySelector(".profile__add");
-const popupForms = Array.prototype.slice.call(document.querySelectorAll(".popup__form"));        
-const popupCloseIcons = Array.prototype.slice.call(document.querySelectorAll(".popup__close-icon"));
+const popupForms = Array.from(document.querySelectorAll(".popup__form"));        
+const popupCloseIcons = Array.from(document.querySelectorAll(".popup__close-icon"));
 
 /* Переменные для редактирования профиля через попап */
-const popupProfile = document.querySelectorAll(".popup")[0];
-const profileEditSubmit = popupForms[0];
-const popupEditProfileName = Array.prototype.slice.call(document.querySelectorAll(".popup__text:nth-of-type(1)"))[0];
-const popupEditProfileDescription = Array.prototype.slice.call(document.querySelectorAll(".popup__text:nth-of-type(2)"))[0];
+const popupProfile = document.querySelector(".popup_profile");
+const profileEditSubmit = document.querySelector("[name=profile-form]");
+const popupEditProfileName = document.querySelector("[name=profile-form-name]");
+const popupEditProfileDescription = document.querySelector("[name=profile-form-description]");
 const profileName = document.querySelector(".profile__info-name");
 const profileDescription = document.querySelector(".profile__info-description");
-const popupCloseProfile = popupCloseIcons[0];
+const popupCloseProfile = document.querySelector(".popup_profile_close");
 
 /* Переменные для добавления карт через попап*/
-const popupCard = document.querySelectorAll(".popup")[1];
-const cardNameEdit = Array.prototype.slice.call(document.querySelectorAll(".popup__text:nth-of-type(1)"))[1];
-const cardLinkEdit = Array.prototype.slice.call(document.querySelectorAll(".popup__text:nth-of-type(2)"))[1];
-const popupCloseCard = Array.prototype.slice.call(document.querySelectorAll(".popup__close-icon"))[1];
+const popupCard = document.querySelector(".popup_card-add");
+const cardNameEdit = document.querySelector("[name=card-form-name]");
+const cardLinkEdit = document.querySelector("[name=card-form-link]");
+const popupCloseCard = document.querySelector(".popup_card-add_close");
 
 /* Переменные для попапа с большими изображениями из карт */
-const popupFullscreen = document.querySelectorAll(".popup")[2];
-const popupCloseFullscreen = Array.prototype.slice.call(document.querySelectorAll(".popup__close-icon"))[2];
+const popupFullscreen = document.querySelector(".popup_fullscreen-image");
+const popupCloseFullscreen = document.querySelector(".popup_fullscreen-image_close");
 const popupFullImage = document.querySelector(".popup__fullscreen-image");
 const popupFullImageCaption = document.querySelector(".popup__fullscreen-caption");

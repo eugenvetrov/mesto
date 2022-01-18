@@ -32,20 +32,20 @@
         </template>
     </section>
     </main>
-    <div class="popup popup_background_form">
+    <div class="popup popup_background_form popup_profile">
         <div class="popup__container">
-            <button class="popup__close-icon" type="button"></button>
+            <button class="popup__close-icon popup_profile_close" type="button"></button>
             <form class="popup__form" name="profile-form">
                 <h2 class="popup__title">Редактировать профиль</h2>
                 <input class="popup__text" type="text" name="profile-form-name" value="Жак Ив Кусто">
                 <input class="popup__text" type="text" name="profile-form-description" value="Исследователь океана">
-                <input class="popup__submit" type="submit" value="Сохранить">
+                <input class="popup__submit popup_profile_submit" type="submit" value="Сохранить">
             </form>
         </div>
     </div>
-    <div class="popup popup_background_form">
+    <div class="popup popup_background_form popup_card-add">
         <div class="popup__container">
-            <button class="popup__close-icon" type="button"></button>
+            <button class="popup__close-icon popup_card-add_close" type="button"></button>
             <form class="popup__form" name="card-form">
                 <h2 class="popup__title">Новое место</h2>
                 <input class="popup__text" type="text" name="card-form-name" placeholder="Название">
@@ -55,9 +55,9 @@
             </form>
         </div>
     </div>
-    <div class="popup popup_background_fullscreen">
+    <div class="popup popup_background_fullscreen popup_fullscreen-image">
         <figure class="popup__fullscreen">
-            <button class="popup__close-icon" type="button"></button>
+            <button class="popup__close-icon popup_fullscreen-image_close" type="button"></button>
             <img class="popup__fullscreen-image" src="./images/fullscreen-picture-default.svg" alt="Изображение в полноэкранном режиме">
             <figcaption class="popup__fullscreen-caption"></figcaption>
         </figure>
