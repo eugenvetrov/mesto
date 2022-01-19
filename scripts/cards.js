@@ -2,61 +2,88 @@
    Необходимо добавление popups.js после cards.js
 */
 
-//Функция для монтажа карты
-const makeCard = (link, name) => {
-    const card = cardContent.cloneNode(true);
-    card.querySelector('.group__image').src = link;
-    card.querySelector('.group__name').textContent = name;
-    return card;
-}
-
-//Функция для рендера всех карт из массива
-const renderCards = () => {
-    cardsArray.forEach((element) => renderCard(element));
-}
-
-/* Функция для монтажа и рендера каждой карты
-   Принимает элемент из массива
-   По умолчанию добавляет карту в конец секции
-   При флаге toBegin добавляет карту в начало секции
-   */
-const renderCard = (element, toBegin) => {
-    const card = makeCard(element.link, element.name);
-    const cardImage = card.querySelector(".group__image");
-    const likeIcon = card.querySelector(".group__like-icon");
-    const trashIcon = card.querySelector(".group__delete-icon");
-    const readyCard = card.querySelector(".group__rectangle");
-    /* Переключатель состояния "Нравится"/"Не нравится" переданному элементу массива */
-    const likeToggler = () => {
-        element.like = !element.like;
+const addInitialCards = () => {
+        cardsArray.forEach((element) => {
+        addCardToEnd(element)
     }
-    /* Рендер лайка для смонтированной карты */
-    const renderLike = () => {
-        if (element.like == true) {
+        );
+}
+
+const addCardToBegin = (element) => {
+    const card = addCardListeners(element);
+    const renderedCards = Array.from(group.children);
+    renderedCards[0].after(card);
+}
+
+const addCardToEnd = (element) => {
+    const readyCard = addCardListeners(element)
+    group.append(readyCard);
+}
+
+
+const addCardListeners = (element) => {
+
+    const cardForListenersAdding = makeCard(element.link, element.name);
+    const likeIcon = cardForListenersAdding.querySelector(".group__like-icon");
+    const trashIcon = cardForListenersAdding.querySelector(".group__delete-icon");
+    const cardForDelete  = cardForListenersAdding.querySelector(".group__rectangle");
+    const cardImage = cardForListenersAdding.querySelector(".group__image");
+
+    const addLikeListener = () => {
+        likeIcon.addEventListener("click", (e) => {
+            e.preventDefault;
+            toggleLikeIcon(cardForListenersAdding);
+        }
+            );
+    }
+
+    const toggleLikeIcon = () => {
+        const likeIsActive = likeIcon.classList.contains("group__like-icon_active")
+        if (!likeIsActive) {
             likeIcon.setAttribute("src", "./images/like-active.svg");
             likeIcon.classList.add("group__like-icon_active");
-        } else if (element.like == false){
+        } else if (likeIsActive){
             likeIcon.setAttribute("src", "./images/like.svg");
             likeIcon.classList.remove("group__like-icon_active");
         }
     }
-    const likeListener = () => {
-        likeToggler();
-        renderLike();
+    
+    const addDeleteListener = () => {
+        trashIcon.addEventListener("click", (e) => {
+            e.preventDefault;
+            deleteCard()
+        }
+            );
     }
-    /* Функция для удаления карты из массива и из секции */
+
     const deleteCard = () => {
-        const index = cardsArray.indexOf(element);
-        cardsArray.splice(index, 1);
-        readyCard.remove(element);
+        cardForDelete.remove();
     }
-    likeIcon.addEventListener("click", likeListener);
-    trashIcon.addEventListener("click", deleteCard);    
-    fullscreenPopup(cardImage, element.link, element.name)
-    if (toBegin) {
-        const renderedCards = Array.prototype.slice.call(group.children);
-        renderedCards[0].after(card);
-    } else {
-    group.append(card);
+
+    const addListenersOfCard = () => {
+        addLikeListener();
+        addDeleteListener();
+        addFullscreenPopupListeners(cardImage, element.link, element.name)
     }
+
+    addListenersOfCard();
+
+    return cardForListenersAdding;
 }
+
+const makeCard = (link, name) => {
+    const card = makeCloneTemplateForCard();
+    card.querySelector('.group__image').src = link;
+    card.querySelector('.group__name').textContent = name;
+    card.querySelector('.group__image').alt = name;
+    return card;
+}
+
+const makeCloneTemplateForCard = () => {
+    const cardTemplate = document.querySelector("#group__cards");
+    const cardContent = cardTemplate.content;
+    const cardTemplateClone = cardContent.cloneNode(true);
+    return cardTemplateClone;
+}
+
+

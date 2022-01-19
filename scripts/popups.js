@@ -13,74 +13,162 @@ const closePopup = (kindOfPopup) => {
 /* Попап для редактирования профиля */
 const profilePopup = () => {
 
-    const openProfilePopup = () => {
-        openPopup(popupProfile);
+    const setOpeningProfilePopupValues = () => {
         popupEditProfileName.value = profileName.textContent;
         popupEditProfileDescription.value = profileDescription.textContent;
+    }
+
+    const openProfilePopup = () => {
+        openPopup(popupProfile);        
+    }
+
+    const openAndSetProfilePopup = () => {
+        setOpeningProfilePopupValues();
+        openProfilePopup();
     }
     
     const closePopupProfile = () => {
         closePopup(popupProfile);
     }
-    
-    const editProfilePopup = (event) => {
-        event.preventDefault();
+
+    const setTextEditProfilePopup = () => {
         profileName.textContent = popupEditProfileName.value;
         profileDescription.textContent = popupEditProfileDescription.value;
+    }
+    
+    const submitEditProfilePopup = (event) => {
+        event.preventDefault();
+        setTextEditProfilePopup();
         closePopup(popupProfile);
     }
     
-editButton.addEventListener("click", openProfilePopup);
-profileEditSubmit.addEventListener("submit", editProfilePopup);
-popupCloseProfile.addEventListener("click", closePopupProfile);
+    const addProfileEditButtonListener = () => {
+        editButton.addEventListener("click", openAndSetProfilePopup);
+    }
+
+    const addSubmitProfileEditing = () => {
+        profileEditSubmit.addEventListener("submit", submitEditProfilePopup);
+    }
+
+    const addProfilePopupCloseListener = () => {
+        popupCloseProfile.addEventListener("click", closePopupProfile);
+    }
+
+    const addProfilePopupListeners = () => {
+        addProfileEditButtonListener();
+        addSubmitProfileEditing();
+        addProfilePopupCloseListener();
+    }
+
+    addProfilePopupListeners();
     
 }
 
 /* Функция для попапа по добавлению карт */
 const cardPopup = () => {
+
+    const setOpeningCardPopupValue = () => {
+        cardNameEdit.value = '';
+        cardLinkEdit.value = '';
+    }
     
     const openCardPopup = () => {
         openPopup(popupCard);
-        cardNameEdit.value = '';
-        cardLinkEdit.value = '';
+    }
+
+    const openAndSetCardPopup = () => {
+        openCardPopup();
+        setOpeningCardPopupValue();
     }
 
     const closePopupCard = () => {
         closePopup(popupCard);
     }
 
-    const addCard = (event) => {
-        event.preventDefault();
-        newItem = {
+    const setCardNewItem = () => {
+        return newItem = {
             name: cardNameEdit.value, 
             link: cardLinkEdit.value,
-            like: false
         }
-        cardsArray.unshift(newItem);
-        renderCard(cardsArray[0], true);
+    }
+
+    const addNewCardItemToArray = () => {
+        const item = setCardNewItem()
+        cardsArray.unshift(item);
+    }
+
+    const addNewCard = (event) => {
+        event.preventDefault();
+        addNewCardItemToArray();
+        addCardToBegin(cardsArray[0]);
         closePopupCard();
     }
 
-addButton.addEventListener("click", openCardPopup);
-cardAddSubmit.addEventListener("submit", addCard);
-popupCloseCard.addEventListener("click", closePopupCard);
+    const addCardAddButtonListener = () => {
+        addButton.addEventListener("click", openAndSetCardPopup);
+    }
+    
+    const addSubmitCardAddingListener = () => {
+        cardAddSubmit.addEventListener("submit", addNewCard);
+    }
+
+    const addCardPopupCloseListener = () => {
+        popupCloseCard.addEventListener("click", closePopupCard);
+    }
+
+    const addCardPopupListeners = () => {
+        addCardAddButtonListener();
+        addSubmitCardAddingListener();
+        addCardPopupCloseListener();
+    }
+
+    addCardPopupListeners();
+
 }
 
 /* Функция для раскрытия изображения карты на весь экран */
-const fullscreenPopup = (image, link, name) => {
-    const element = image;
-    const src = link;
-    const caption = name;
-    const openFullscreenPopup = (src, caption) => {
-        openPopup(popupFullscreen);
-        popupFullImage.src = src;
-        popupFullImageCaption.textContent = caption;
+const addFullscreenPopupListeners = (cardImage, link, name) => {
+
+    const setFullscreenImage = () => {
+        const fullScreenImageSrc = link;
+        popupFullImage.src = fullScreenImageSrc;
     }
+
+    const setFullscreenImageCaption = () => {
+        const fullScreenImageCaption = name;
+        popupFullImageCaption.textContent = fullScreenImageCaption;
+    }
+
+    const openFullscreenPopup = () => {
+        openPopup(popupFullscreen);        
+    }
+
+    const setAndOpenFullscreenPopup = () => {
+        setFullscreenImage();
+        setFullscreenImageCaption();
+        openFullscreenPopup();
+    }
+
     const closeFullscreenPopup = () => {
         closePopup(popupFullscreen);
     }
-    element.addEventListener("click", () => {
-        openFullscreenPopup(src, caption)
-    })
-    popupCloseFullscreen.addEventListener("click", closeFullscreenPopup);
+
+    const addOpenFullscreenPopupListener = () => {
+        const fullscreenOpeningImage = cardImage;
+        fullscreenOpeningImage.addEventListener("click", () => {
+            setAndOpenFullscreenPopup()
+        });
+    }
+
+    const addCloseFullsscreenPopupListener = () => {
+        popupCloseFullscreen.addEventListener("click", closeFullscreenPopup);
+    }
+
+    const addFullscreenPopupListeners = () => {
+        addOpenFullscreenPopupListener();
+        addCloseFullsscreenPopupListener();
+    }
+
+    addFullscreenPopupListeners();
+    
 }

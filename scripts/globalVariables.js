@@ -1,9 +1,8 @@
 /* Переменные для действий с картами */
-const cardTemplate = document.querySelector("#group__cards");
-const cardContent = cardTemplate.content;
 const cardAddSubmit = document.querySelector(".popup_card-add");
 const group = document.querySelector(".group");
 const trashIcons = Array.from(document.querySelectorAll(".group__delete-icon"));
+
 
 /* Переменные для базовых действий с попапами */
 const editButton = document.querySelector(".profile__info-edit");
