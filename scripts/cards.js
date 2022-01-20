@@ -10,29 +10,29 @@ const addInitialCards = () => {
 }
 
 const addCardToBegin = (element) => {
-    const card = addCardListeners(element);
+    const readyCard = renderCard(element);
     const renderedCards = Array.from(group.children);
-    renderedCards[0].after(card);
+    renderedCards[0].after(readyCard);
 }
 
 const addCardToEnd = (element) => {
-    const readyCard = addCardListeners(element)
+    const readyCard = renderCard(element)
     group.append(readyCard);
 }
 
 
-const addCardListeners = (element) => {
+const renderCard = (element) => {
 
-    const cardForListenersAdding = makeCard(element.link, element.name);
-    const likeIcon = cardForListenersAdding.querySelector(".group__like-icon");
-    const trashIcon = cardForListenersAdding.querySelector(".group__delete-icon");
-    const cardForDelete  = cardForListenersAdding.querySelector(".group__rectangle");
-    const cardImage = cardForListenersAdding.querySelector(".group__image");
+    const renderingCard = makeCard(element.link, element.name);
+    const likeIcon = renderingCard.querySelector(".group__like-icon");
+    const trashIcon = renderingCard.querySelector(".group__delete-icon");
+    const cardForDelete  = renderingCard.querySelector(".group__rectangle");
+    const cardImage = renderingCard.querySelector(".group__image");
 
     const addLikeListener = () => {
-        likeIcon.addEventListener("click", (e) => {
-            e.preventDefault;
-            toggleLikeIcon(cardForListenersAdding);
+        likeIcon.addEventListener("click", (event) => {
+            event.preventDefault;
+            toggleLikeIcon(renderingCard);
         }
             );
     }
@@ -40,17 +40,15 @@ const addCardListeners = (element) => {
     const toggleLikeIcon = () => {
         const likeIsActive = likeIcon.classList.contains("group__like-icon_active")
         if (!likeIsActive) {
-            likeIcon.setAttribute("src", "./images/like-active.svg");
             likeIcon.classList.add("group__like-icon_active");
         } else if (likeIsActive){
-            likeIcon.setAttribute("src", "./images/like.svg");
             likeIcon.classList.remove("group__like-icon_active");
         }
     }
     
     const addDeleteListener = () => {
-        trashIcon.addEventListener("click", (e) => {
-            e.preventDefault;
+        trashIcon.addEventListener("click", (event) => {
+            event.preventDefault;
             deleteCard()
         }
             );
@@ -68,7 +66,7 @@ const addCardListeners = (element) => {
 
     addListenersOfCard();
 
-    return cardForListenersAdding;
+    return renderingCard;
 }
 
 const makeCard = (link, name) => {
