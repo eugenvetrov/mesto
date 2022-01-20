@@ -129,21 +129,26 @@ const cardPopup = () => {
 /* Функция для раскрытия изображения карты на весь экран */
 const addFullscreenPopupListeners = (fullscreenOpeningImage, fullScreenImageSrc, fullScreenImageCaption) => {
 
-    const setFullscreenImage = () => {
-        popupFullImage.src = fullScreenImageSrc;
+    const setFullscreenImage = (image) => {
+        popupFullImage.src = image;
     }
 
-    const setFullscreenImageCaption = () => {
-        popupFullImageCaption.textContent = fullScreenImageCaption;
+    const setFullscreenImageCaption = (caption) => {
+        popupFullImageCaption.textContent = caption;
+    }
+
+    const setFullScreenImageAltTeg = (alt) => {
+        popupFullImage.alt = alt;
     }
 
     const openFullscreenPopup = () => {
         openPopup(popupFullscreen);        
     }
 
-    const setAndOpenFullscreenPopup = () => {
-        setFullscreenImage();
-        setFullscreenImageCaption();
+    const setAndOpenFullscreenPopupHandler = () => {
+        setFullscreenImage(fullScreenImageSrc);
+        setFullscreenImageCaption(fullScreenImageCaption);
+        setFullScreenImageAltTeg(fullScreenImageCaption);
         openFullscreenPopup();
     }
 
@@ -153,7 +158,7 @@ const addFullscreenPopupListeners = (fullscreenOpeningImage, fullScreenImageSrc,
 
     const addOpenFullscreenPopupListener = () => {
         fullscreenOpeningImage.addEventListener("click", () => {
-            setAndOpenFullscreenPopup()
+            setAndOpenFullscreenPopupHandler()
         });
     }
 

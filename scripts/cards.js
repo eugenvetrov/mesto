@@ -29,16 +29,16 @@ const renderCard = (element) => {
     const cardForDelete  = renderingCard.querySelector(".group__rectangle");
     const cardImage = renderingCard.querySelector(".group__image");
 
-    const addLikeListener = () => {
-        likeIcon.addEventListener("click", (event) => {
+    const addLikeListener = (like) => {
+        like.addEventListener("click", (event) => {
             event.preventDefault;
-            toggleLikeIcon(renderingCard);
+            toggleLikeIconHandler(like);
         }
             );
     }
 
-    const toggleLikeIcon = () => {
-        const likeIsActive = likeIcon.classList.contains("group__like-icon_active")
+    const toggleLikeIconHandler = (icon) => {
+        const likeIsActive = icon.classList.contains("group__like-icon_active")
         if (!likeIsActive) {
             likeIcon.classList.add("group__like-icon_active");
         } else if (likeIsActive){
@@ -46,21 +46,21 @@ const renderCard = (element) => {
         }
     }
     
-    const addDeleteListener = () => {
-        trashIcon.addEventListener("click", (event) => {
+    const addDeleteListener = (icon) => {
+        icon.addEventListener("click", (event) => {
             event.preventDefault;
-            deleteCard()
+            deleteCardHandler(cardForDelete);
         }
             );
     }
 
-    const deleteCard = () => {
-        cardForDelete.remove();
+    const deleteCardHandler = (card) => {
+        card.remove();
     }
 
     const addListenersOfCard = () => {
-        addLikeListener();
-        addDeleteListener();
+        addLikeListener(likeIcon);
+        addDeleteListener(trashIcon);
         addFullscreenPopupListeners(cardImage, element.link, element.name)
     }
 
