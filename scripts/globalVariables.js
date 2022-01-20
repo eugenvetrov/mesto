@@ -15,16 +15,16 @@ const popupEditProfileName = document.querySelector("[name=profile-form-name]");
 const popupEditProfileDescription = document.querySelector("[name=profile-form-description]");
 const profileName = document.querySelector(".profile__info-name");
 const profileDescription = document.querySelector(".profile__info-description");
-const popupCloseProfile = document.querySelector(".popup_profile-close");
+const popupCloseProfile = document.querySelector(".popup__close-icon_profile");
 
 /* Переменные для добавления карт через попап*/
 const popupCard = document.querySelector(".popup_card-add");
 const cardNameEdit = document.querySelector("[name=card-form-name]");
 const cardLinkEdit = document.querySelector("[name=card-form-link]");
-const popupCloseCard = document.querySelector(".popup_card-close");
+const popupCloseCard = document.querySelector(".popup__close-icon_card-close");
 
 /* Переменные для попапа с большими изображениями из карт */
 const popupFullscreen = document.querySelector(".popup_fullscreen-image");
-const popupCloseFullscreen = document.querySelector(".popup_fullscreen-close");
+const popupCloseFullscreen = document.querySelector(".popup__close-icon_fullscreen");
 const popupFullImage = document.querySelector(".popup__fullscreen-image");
 const popupFullImageCaption = document.querySelector(".popup__fullscreen-caption");
