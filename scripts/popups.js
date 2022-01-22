@@ -41,26 +41,10 @@ const profilePopup = () => {
         setTextEditProfilePopup();
         closePopup(popupProfile);
     }
-    
-    const addProfileEditButtonListener = () => {
-        editButton.addEventListener("click", openAndSetProfilePopup);
-    }
 
-    const addSubmitProfileEditing = () => {
-        profileEditSubmit.addEventListener("submit", submitEditProfilePopup);
-    }
-
-    const addProfilePopupCloseListener = () => {
-        popupCloseProfile.addEventListener("click", closePopupProfile);
-    }
-
-    const addProfilePopupListeners = () => {
-        addProfileEditButtonListener();
-        addSubmitProfileEditing();
-        addProfilePopupCloseListener();
-    }
-
-    addProfilePopupListeners();
+    editButton.addEventListener("click", openAndSetProfilePopup);  
+    profileEditSubmit.addEventListener("submit", submitEditProfilePopup);  
+    popupCloseProfile.addEventListener("click", closePopupProfile); 
     
 }
 
@@ -85,92 +69,50 @@ const cardPopup = () => {
         closePopup(popupCard);
     }
 
-    const setCardNewItem = () => {
+    const setCardNewItem = (name, link) => {
         return newItem = {
-            name: cardNameEdit.value, 
-            link: cardLinkEdit.value,
+            name: name.value, 
+            link: link.value,
         }
     }
-
-    const addNewCardItemToArray = () => {
-        const item = setCardNewItem()
-        cardsArray.unshift(item);
-    }
-
+    
     const addNewCard = (event) => {
         event.preventDefault();
-        addNewCardItemToArray();
-        addCardToBegin(cardsArray[0]);
+        addCardToBegin(setCardNewItem(cardNameEdit, cardLinkEdit));
         closePopupCard();
     }
-
-    const addCardAddButtonListener = () => {
-        addButton.addEventListener("click", openAndSetCardPopup);
-    }
     
-    const addSubmitCardAddingListener = () => {
-        cardAddSubmit.addEventListener("submit", addNewCard);
-    }
-
-    const addCardPopupCloseListener = () => {
-        popupCloseCard.addEventListener("click", closePopupCard);
-    }
-
-    const addCardPopupListeners = () => {
-        addCardAddButtonListener();
-        addSubmitCardAddingListener();
-        addCardPopupCloseListener();
-    }
-
-    addCardPopupListeners();
+    addButton.addEventListener("click", openAndSetCardPopup);  
+    cardAddSubmit.addEventListener("submit", addNewCard);  
+    popupCloseCard.addEventListener("click", closePopupCard);
 
 }
 
 /* Функция для раскрытия изображения карты на весь экран */
-const addFullscreenPopupListeners = (fullscreenOpeningImage, fullScreenImageSrc, fullScreenImageCaption) => {
+const fullscreenPopupListener = (fullscreenOpeningImage, fullScreenImageSrc, fullScreenImageCaption) => {
 
-    const setFullscreenImage = (image) => {
-        popupFullImage.src = image;
-    }
+    const setFullscreenPopupValues = (src, caption) => {
 
-    const setFullscreenImageCaption = (caption) => {
+        popupFullImage.src = src;
+
         popupFullImageCaption.textContent = caption;
-    }
-
-    const setFullScreenImageAltTeg = (alt) => {
-        popupFullImage.alt = alt;
-    }
-
-    const openFullscreenPopup = () => {
-        openPopup(popupFullscreen);        
-    }
-
-    const setAndOpenFullscreenPopupHandler = () => {
-        setFullscreenImage(fullScreenImageSrc);
-        setFullscreenImageCaption(fullScreenImageCaption);
-        setFullScreenImageAltTeg(fullScreenImageCaption);
-        openFullscreenPopup();
-    }
-
-    const closeFullscreenPopup = () => {
-        closePopup(popupFullscreen);
-    }
-
-    const addOpenFullscreenPopupListener = () => {
-        fullscreenOpeningImage.addEventListener("click", () => {
-            setAndOpenFullscreenPopupHandler()
-        });
-    }
-
-    const addCloseFullsscreenPopupListener = () => {
-        popupCloseFullscreen.addEventListener("click", closeFullscreenPopup);
-    }
-
-    const addFullscreenPopupListeners = () => {
-        addOpenFullscreenPopupListener();
-        addCloseFullsscreenPopupListener();
-    }
-
-    addFullscreenPopupListeners();
     
+        popupFullImage.alt = caption;
+    }
+
+    fullscreenOpeningImage.addEventListener("click", () => {
+        
+        setFullscreenPopupValues(fullScreenImageSrc, fullScreenImageCaption);
+
+        openPopup(popupFullscreen);
+    }
+    )
+
 }
+
+const closeFullscreenPopup = () => {
+    closePopup(popupFullscreen);
+}
+
+popupCloseFullscreen.addEventListener("click", closeFullscreenPopup);
+
