@@ -101,13 +101,10 @@ const fullscreenPopupListener = (fullscreenOpeningImage, fullScreenImageSrc, ful
     }
 
     fullscreenOpeningImage.addEventListener("click", () => {
-        
         setFullscreenPopupValues(fullScreenImageSrc, fullScreenImageCaption);
-
         openPopup(popupFullscreen);
     }
-    )
-
+    );
 }
 
 const closeFullscreenPopup = () => {
