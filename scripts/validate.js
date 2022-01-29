@@ -28,7 +28,7 @@ const toggleButton = (form, {submitButtonSelector, inactiveButtonClass}) => {
     }
 }
 
-const validateInput = (form, input, {inputErrorClass, errorClass, submitButtonSelector, inactiveButtonClass}) => {
+const validateInput = (form, input, {submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass}) => {
     console.log(input.validity.valid);
     const errorContainer = form.querySelector(`#${input.id}-error`);
     let errorText = input.validationMessage;
@@ -45,7 +45,8 @@ const enableValidation = ({formSelector,
                            inputSelector,
                            submitButtonSelector,
                            inactiveButtonClass,
-                           ...rest}) => {
+                           inputErrorClass,
+                           errorClass}) => {
     const forms = Array.from(document.querySelectorAll(formSelector));
     forms.forEach((form) => {
         toggleButton(form, {submitButtonSelector, inactiveButtonClass});
@@ -56,7 +57,7 @@ const enableValidation = ({formSelector,
         const inputs = form.querySelectorAll(inputSelector);
         inputs.forEach((input) => {
             const validateInputHandler = () => {
-                validateInput(form, input, {submitButtonSelector, inactiveButtonClass}, rest);
+                validateInput(form, input, {submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass});
             }
             input.addEventListener("input", validateInputHandler);
         })
