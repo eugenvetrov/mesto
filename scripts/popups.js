@@ -85,11 +85,8 @@ const fullscreenPopupHandler = (event) => {
     openPopup(popupFullscreen);
 }
 
-
-
 const closeFullscreenPopup = () => {
     closePopup(popupFullscreen);
 }
 
 popupCloseFullscreen.addEventListener("click", closeFullscreenPopup);
-
