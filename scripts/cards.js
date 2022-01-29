@@ -1,7 +1,3 @@
-/* Функции для карточек и лайков
-   Необходимо добавление popups.js после cards.js
-*/
-
 const addInitialCards = () => {
         cardsArray.forEach((element) => {
         addCardToEnd(element)
@@ -25,24 +21,31 @@ const renderCard = (element) => {
     const renderingCard = makeCard(element.link, element.name);
     const likeIcon = renderingCard.querySelector(".group__like-icon");
     const trashIcon = renderingCard.querySelector(".group__delete-icon");
-    const cardForDelete  = renderingCard.querySelector(".group__rectangle");
     const cardImage = renderingCard.querySelector(".group__image");
 
-    likeIcon.addEventListener("click", (event) => {
+    const likeIconHandler = (event) => {
         event.preventDefault;
-        likeIcon.classList.toggle("group__like-icon_active");
-        }
-    );
+        const like = event.target;
+        like.classList.toggle("group__like-icon_active");
+    }
 
-    
-    trashIcon.addEventListener("click", (event) => {
+    likeIcon.addEventListener("click", likeIconHandler);
+
+    const trashIconHandler = (event) => {
         event.preventDefault;
+
+        const cardForDelete = event.target.closest(".group__rectangle");
+        const likeForDeleteListener = cardForDelete.querySelector(".group__like-icon");
+        const fullScreenImageForDeleteListener = cardForDelete.querySelector(".group__image");
+
+        likeForDeleteListener.removeEventListener("click", likeIconHandler);
+        fullScreenImageForDeleteListener.removeEventListener("click", fullscreenPopupHandler)
         cardForDelete.remove();
-        }
-    );
+    }
 
-    fullscreenPopupListener(cardImage, element.link, element.name)
-
+    cardImage.addEventListener("click", fullscreenPopupHandler);
+    trashIcon.addEventListener("click", trashIconHandler);
+    
     return renderingCard;
 }
 
