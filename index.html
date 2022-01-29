@@ -35,32 +35,48 @@
     <div class="popup popup_background_form popup_profile">
         <div class="popup__container">
             <button class="popup__close-icon popup__close-icon_profile" type="button"></button>
-            <form class="popup__form popup__form_profile" name="profile-form" novalidate>
+            <form class="popup__form popup__form_profile" name="profile-form" autoComplete="off" novalidate>
                 <h2 class="popup__title">Редактировать профиль</h2>
                 <input class="popup__text popup__text_profile-name"
-                    type="text" name="form-profile-name" id="profile-name"
-                    value="Жак Ив Кусто" required>
-                        <span class="profile-name-error popup__error">Вы пропустили это поле</span>
+                       type="text"
+                       name="form-profile-name"
+                       id="profile-name"
+                       value="Жак Ив Кусто"
+                       minlength="2" maxlength="40"
+                       required>
+                        <span class="popup__error" id="profile-name-error"></span>
                 <input class="popup__text popup__text_profile-description"
-                    type="text" name="form-profile-description" id="profile-description"
-                    value="Исследователь океана" required>
-                        <span class="profile-description-error popup__error">Вы пропустили это поле</span>
-                <input class="popup__submit popup__submit_disabled" type="submit" value="Сохранить">
+                       type="text" name="form-profile-description"
+                       id="profile-description"
+                       value="Исследователь океана"
+                       minlength="2" maxlength="200"
+                       required>
+                        <span class="popup__error" id="profile-description-error"></span>
+                <input class="popup__submit" type="submit" value="Сохранить">
             </form>
         </div>
     </div>
     <div class="popup popup_background_form popup_card-add">
         <div class="popup__container">
             <button class="popup__close-icon popup__close-icon_card-close" type="button"></button>
-            <form class="popup__form" name="card-form">
+            <form class="popup__form" name="card-form" autoComplete="off" novalidate>
                 <h2 class="popup__title">Новое место</h2>
-                <input class="popup__text popup__text_card-name" id="card-name"
-                    type="text" name="card-form-name" placeholder="Название" required>
-                        <span class="card-name-error popup__error">Вы пропустили это поле</span>
-                <input class="popup__text popup__text_card-link" id="card-link"
-                    type="text" name="card-form-link" placeholder="Ссылка на картинку" required>
-                        <span class="card-link-error popup__error">Введите адрес сайта</span>
-                <input class="popup__submit popup__submit_disabled" type="submit" value="Создать">
+                <input class="popup__text popup__text_card-name"
+                       id="card-name"
+                       type="text"
+                       name="card-form-name"
+                       placeholder="Название"
+                       minlength="2" maxlength="30"
+                       required>
+                        <span class="popup__error" id="card-name-error"></span>
+                <input class="popup__text popup__text_card-link"
+                       id="card-link"
+                       type="url"
+                       name="card-form-link"
+                       placeholder="Ссылка на картинку"
+                       required>
+                        <span class="popup__error" id="card-link-error"></span>
+                <input class="popup__submit" type="submit" value="Создать">
             </form>
         </div>
     </div>
