@@ -15,16 +15,24 @@ const hideError = (input, errorContainer, {inputErrorClass, errorClass}) => {
     errorContainer.textContent = '';
 }
 
+const disableSubmit = (submitButton, inactiveButtonClass) => {
+    submitButton.classList.add(inactiveButtonClass);
+    submitButton.setAttribute('disabled', 'disabled');
+}
+
+const enableSubmit = (submitButton, inactiveButtonClass) => {
+    submitButton.classList.remove(inactiveButtonClass);
+    submitButton.removeAttribute('disabled')
+}
+
 const toggleButton = (form, {submitButtonSelector, inactiveButtonClass}) => {
     const submit = form.querySelector(submitButtonSelector);
     const isFormValid = form.checkValidity();
     console.log(isFormValid);
     if (isFormValid) {
-        submit.classList.remove(inactiveButtonClass);
-        submit.removeAttribute('disabled')
+        enableSubmit(submit, inactiveButtonClass);
     } else {
-        submit.classList.add(inactiveButtonClass);
-        submit.setAttribute('disabled', 'disabled');
+        disableSubmit(submit, inactiveButtonClass);
     }
 }
 
@@ -50,8 +58,10 @@ const enableValidation = ({formSelector,
     const forms = Array.from(document.querySelectorAll(formSelector));
     forms.forEach((form) => {
         toggleButton(form, {submitButtonSelector, inactiveButtonClass});
+        const submit = form.querySelector(submitButtonSelector);
         const submitFormHandler = (event) => {
             submitForm(event);
+            disableSubmit(submit, inactiveButtonClass);
         }
         form.addEventListener("submit", submitFormHandler);
         const inputs = form.querySelectorAll(inputSelector);
