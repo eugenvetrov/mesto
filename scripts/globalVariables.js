@@ -29,3 +29,8 @@ const popupCloseFullscreen = document.querySelector(".popup__close-icon_fullscre
 const popupFullImage = document.querySelector(".popup__fullscreen-image");
 const popupFullImageCaption = document.querySelector(".popup__fullscreen-caption");
 const cardImages = Array.from(document.querySelectorAll(".group__image"));
+
+/* Переменные для оверлеев попапов */
+const popupProfileOverlay = document.querySelector('.popup_background_form.popup_profile');
+const popupCardOverlay = document.querySelector('.popup_background_form.popup_card-add');
+const popupFullscreenOverlay = document.querySelector('.popup_background_fullscreen.popup_fullscreen-image');
