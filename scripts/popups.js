@@ -20,6 +20,12 @@ const openAndSetProfilePopup = () => {
 const popupCloseProfileHandler = () => {
     closePopup(popupProfile);
 }
+const popupCloseByEscProfileHandler = (event) => {
+    if(event.key === 'Escape') {
+        popupCloseProfileHandler();
+        
+    }
+}
 const setTextEditProfilePopup = (name, description) => {
     profileName.textContent = name.value;
     profileDescription.textContent = description.value;
@@ -33,6 +39,7 @@ editButton.addEventListener("click", openAndSetProfilePopup);
 profileEditSubmit.addEventListener("submit", profileEditSubmitHandler);  
 popupCloseProfile.addEventListener("click", popupCloseProfileHandler); 
 popupProfileOverlay.addEventListener("click", popupCloseProfileHandler);
+document.addEventListener("keydown", popupCloseByEscProfileHandler);
 
 
 const setOpeningCardPopupValue = () => {
@@ -49,6 +56,11 @@ const openAndSetCardPopup = () => {
 const closePopupCard = () => {
     closePopup(popupCard);
 }
+const popupCloseByEscCardHandler = (event) => {
+    if(event.key === 'Escape') {
+        closePopupCard();        
+    }
+}
 const setCardNewItem = (name, link) => {
     return newItem = {
         name: name.value, 
@@ -64,6 +76,7 @@ addButton.addEventListener("click", openAndSetCardPopup);
 cardAddSubmit.addEventListener("submit", addNewCard);  
 popupCloseCard.addEventListener("click", closePopupCard);
 popupCardOverlay.addEventListener("click", closePopupCard)
+document.addEventListener("keydown", popupCloseByEscCardHandler);
 
 
 const fullscreenPopupHandler = (event) => {
@@ -84,5 +97,11 @@ const fullscreenPopupHandler = (event) => {
 const closeFullscreenPopup = () => {
     closePopup(popupFullscreen);
 }
+const popupCloseByEscFullscreenHandler = (event) => {
+    if(event.key === 'Escape') {
+        closeFullscreenPopup();        
+    }
+}
 popupCloseFullscreen.addEventListener("click", closeFullscreenPopup);
 popupFullscreenOverlay.addEventListener("click", closeFullscreenPopup);
+document.addEventListener("keydown", popupCloseByEscFullscreenHandler)
