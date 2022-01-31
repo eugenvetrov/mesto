@@ -1,6 +1,7 @@
 const openPopup = (kindOfPopup) => {
     kindOfPopup.classList.add("popup_opened");
 }
+
 const closePopup = (kindOfPopup) => {
     kindOfPopup.classList.remove("popup_opened");
 }
@@ -17,13 +18,12 @@ const openAndSetProfilePopup = () => {
     setOpeningProfilePopupValues();
     openProfilePopup();
 }
-const popupCloseProfileHandler = () => {
+const popupCloseProfileHandler = (event) => {
     closePopup(popupProfile);
 }
 const popupCloseByEscProfileHandler = (event) => {
     if(event.key === 'Escape') {
         popupCloseProfileHandler();
-        
     }
 }
 const setTextEditProfilePopup = (name, description) => {
@@ -37,9 +37,8 @@ const profileEditSubmitHandler = (event) => {
 }
 editButton.addEventListener("click", openAndSetProfilePopup);  
 profileEditSubmit.addEventListener("submit", profileEditSubmitHandler);  
-popupCloseProfile.addEventListener("click", popupCloseProfileHandler); 
-popupProfileOverlay.addEventListener("click", popupCloseProfileHandler);
-document.addEventListener("keydown", popupCloseByEscProfileHandler);
+popupCloseProfile.addEventListener("click", popupCloseProfileHandler);
+document.addEventListener("keydown", popupCloseByEscProfileHandler)
 
 
 const setOpeningCardPopupValue = () => {
@@ -75,7 +74,6 @@ const addNewCard = (event) => {
 addButton.addEventListener("click", openAndSetCardPopup);  
 cardAddSubmit.addEventListener("submit", addNewCard);  
 popupCloseCard.addEventListener("click", closePopupCard);
-popupCardOverlay.addEventListener("click", closePopupCard)
 document.addEventListener("keydown", popupCloseByEscCardHandler);
 
 
@@ -103,5 +101,4 @@ const popupCloseByEscFullscreenHandler = (event) => {
     }
 }
 popupCloseFullscreen.addEventListener("click", closeFullscreenPopup);
-popupFullscreenOverlay.addEventListener("click", closeFullscreenPopup);
-document.addEventListener("keydown", popupCloseByEscFullscreenHandler)
+document.addEventListener("keydown", popupCloseByEscFullscreenHandler);

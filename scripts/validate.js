@@ -70,6 +70,9 @@ const enableValidation = ({formSelector,
                 validateInput(form, input, {submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass});
             }
             input.addEventListener("input", validateInputHandler);
+            /*input.addEventListener("keydown", popupCloseByEscProfileHandler);
+            input.addEventListener("keydown", popupCloseByEscCardHandler);
+            input.addEventListener("keydown", popupCloseByEscFullscreenHandler)*/
         })
     })
     
