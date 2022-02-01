@@ -6,7 +6,6 @@ const closePopup = (kindOfPopup) => {
     kindOfPopup.classList.remove("popup_opened");
 }
 
-
 const setOpeningProfilePopupValues = () => {
     popupEditProfileName.value = profileName.textContent;
     popupEditProfileDescription.value = profileDescription.textContent;
@@ -38,8 +37,21 @@ const profileEditSubmitHandler = (event) => {
 editButton.addEventListener("click", openAndSetProfilePopup);  
 profileEditSubmit.addEventListener("submit", profileEditSubmitHandler);  
 popupCloseProfile.addEventListener("click", popupCloseProfileHandler);
-document.addEventListener("keydown", popupCloseByEscProfileHandler)
-
+document.addEventListener("keydown", popupCloseByEscProfileHandler);
+document.addEventListener(
+    "click",
+    function(event) {
+        console.log("Hello");
+      if (event.target.classList.contains("popup_background_form")
+       || event.target.classList.contains("popup_background_fullscreen")
+      ) {
+        console.log("World");
+        popupCloseProfileHandler();
+        closePopupCard();
+        closeFullscreenPopup()
+      }
+    }
+  )
 
 const setOpeningCardPopupValue = () => {
     cardNameEdit.value = '';

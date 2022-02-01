@@ -31,6 +31,9 @@ const popupFullImageCaption = document.querySelector(".popup__fullscreen-caption
 const cardImages = Array.from(document.querySelectorAll(".group__image"));
 
 /* Переменные для оверлеев попапов */
+const popupProfileContainer = document.querySelector(".popup__profile-container");
 const popupProfileOverlay = document.querySelector('.popup_background_form.popup_profile');
 const popupCardOverlay = document.querySelector('.popup_background_form.popup_card-add');
 const popupFullscreenOverlay = document.querySelector('.popup_background_fullscreen.popup_fullscreen-image');
+
+console.log(popupProfileContainer);
