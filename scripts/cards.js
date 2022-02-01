@@ -18,7 +18,7 @@ group.append(readyCard);
 
 const renderCard = (element) => {
 
-const renderingCard = makeCard(element.link, element.name);
+const renderingCard = makeCard(element);
 const likeIcon = renderingCard.querySelector(".group__like-icon");
 const trashIcon = renderingCard.querySelector(".group__delete-icon");
 const cardImage = renderingCard.querySelector(".group__image");
@@ -33,13 +33,7 @@ likeIcon.addEventListener("click", likeIconHandler);
 
 const trashIconHandler = (event) => {
     event.preventDefault;
-
     const cardForDelete = event.target.closest(".group__rectangle");
-    const likeForDeleteListener = cardForDelete.querySelector(".group__like-icon");
-    const fullScreenImageForDeleteListener = cardForDelete.querySelector(".group__image");
-
-    likeForDeleteListener.removeEventListener("click", likeIconHandler);
-    fullScreenImageForDeleteListener.removeEventListener("click", fullscreenPopupHandler)
     cardForDelete.remove();
 }
 
@@ -49,11 +43,11 @@ trashIcon.addEventListener("click", trashIconHandler);
 return renderingCard;
 }
 
-const makeCard = (link, name) => {
+const makeCard = (element) => {
 const card = makeCloneTemplateForCard();
-card.querySelector('.group__image').src = link;
-card.querySelector('.group__name').textContent = name;
-card.querySelector('.group__image').alt = name;
+card.querySelector('.group__image').src = element.link;
+card.querySelector('.group__name').textContent = element.name;
+card.querySelector('.group__image').alt = element.name;
 return card;
 }
 
