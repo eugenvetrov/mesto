@@ -2,10 +2,7 @@ const submitForm = (event) => {
     event.preventDefault;
 }
 
-const showError = (input, errorContainer, errorText, {inputErrorClass, errorClass}, isFormValid) => {
-    if(isFormValid){
-        errorText = '';
-    }
+const showError = (input, errorContainer, errorText, {inputErrorClass, errorClass}) => {
     input.classList.add(inputErrorClass);
     errorContainer.classList.add(errorClass);
     errorContainer.textContent = errorText;
@@ -44,7 +41,7 @@ const validateInput = (form, input, {submitButtonSelector, inactiveButtonClass, 
         hideError(input, errorContainer, {inputErrorClass, errorClass});
       } else {
         let errorText = input.validationMessage;
-        showError(input, errorContainer, errorText, {inputErrorClass, errorClass}, isFormValid);
+        showError(input, errorContainer, errorText, {inputErrorClass, errorClass});
       }
     toggleButton(form, {submitButtonSelector, inactiveButtonClass})
 }
