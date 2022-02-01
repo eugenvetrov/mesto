@@ -16,7 +16,7 @@ const popupCloseByEscHandler = (event) => {
     const activePopup = document.querySelector(".popup_opened")
     if(event.key === 'Escape') {
         if(activePopup.classList.contains("popup_profile")) {
-            popupCloseProfileHandler();
+            handleClosePopupProfile();
         } else if(activePopup.classList.contains("popup_card-add")) {
             closePopupCard();
         } else if(activePopup.classList.contains("popup_fullscreen-image")) {
@@ -25,11 +25,11 @@ const popupCloseByEscHandler = (event) => {
     }
 }
 
-const closePopupsByOverlayClickHandler = (event) => {
+const handleClosePopupsByClickOverlay = (event) => {
     if (event.target.classList.contains("popup_background_form")
        || event.target.classList.contains("popup_background_fullscreen")
       ) {
-        popupCloseProfileHandler();
+        handleClosePopupProfile();
         closePopupCard();
         closeFullscreenPopup()
       }
@@ -41,19 +41,19 @@ const setOpeningProfilePopupValues = () => {
 }
 const openProfilePopup = () => {
     openPopup(popupProfile);
-    profileEditSubmit.addEventListener("submit", profileEditSubmitHandler);
-    popupCloseProfile.addEventListener("click", popupCloseProfileHandler);
-    popupProfileOverlay.addEventListener("click", closePopupsByOverlayClickHandler)
+    profileEditSubmit.addEventListener("submit", handleSubmitEditProfile);
+    popupCloseProfile.addEventListener("click", handleClosePopupProfile);
+    popupProfileOverlay.addEventListener("click", handleClosePopupsByClickOverlay)
     document.addEventListener("keydown", popupCloseByEscHandler);
 }
 const openAndSetProfilePopup = () => {
     setOpeningProfilePopupValues();
     openProfilePopup();
 }
-const popupCloseProfileHandler = (event) => {
-    profileEditSubmit.removeEventListener("submit", profileEditSubmitHandler);
-    popupCloseProfile.removeEventListener("click", popupCloseProfileHandler);
-    popupProfileOverlay.removeEventListener("click", closePopupsByOverlayClickHandler);
+const handleClosePopupProfile = (event) => {
+    profileEditSubmit.removeEventListener("submit", handleSubmitEditProfile);
+    popupCloseProfile.removeEventListener("click", handleClosePopupProfile);
+    popupProfileOverlay.removeEventListener("click", handleClosePopupsByClickOverlay);
     document.removeEventListener("keydown", popupCloseByEscHandler);
     closePopup(popupProfile);
 }
@@ -62,7 +62,7 @@ const setTextEditProfilePopup = (name, description) => {
     profileName.textContent = name.value;
     profileDescription.textContent = description.value;
 }
-const profileEditSubmitHandler = (event) => {
+const handleSubmitEditProfile = (event) => {
     event.preventDefault();
     setTextEditProfilePopup(popupEditProfileName, popupEditProfileDescription);
     closePopup(popupProfile);
@@ -79,7 +79,7 @@ const openCardPopup = () => {
     openPopup(popupCard);
     cardAddSubmit.addEventListener("submit", addNewCard);  
     popupCloseCard.addEventListener("click", closePopupCard);
-    popupCardOverlay.addEventListener("click", closePopupsByOverlayClickHandler);
+    popupCardOverlay.addEventListener("click", handleClosePopupsByClickOverlay);
     document.addEventListener("keydown", popupCloseByEscHandler); 
 }
 const openAndSetCardPopup = () => {
@@ -89,7 +89,7 @@ const openAndSetCardPopup = () => {
 const closePopupCard = () => {
     cardAddSubmit.removeEventListener("submit", addNewCard);  
     popupCloseCard.removeEventListener("click", closePopupCard);
-    popupCardOverlay.removeEventListener("click", closePopupsByOverlayClickHandler);
+    popupCardOverlay.removeEventListener("click", handleClosePopupsByClickOverlay);
     document.removeEventListener("keydown", popupCloseByEscHandler); 
     closePopup(popupCard);
 }
@@ -107,7 +107,7 @@ const addNewCard = (event) => {
 addButton.addEventListener("click", openAndSetCardPopup);  
 
 
-const fullscreenPopupHandler = (event) => {
+const handlePopupFullscreenImage = (event) => {
 
     const fullscreenOpeningImage = event.target;
     const fullscreenOpeningImageCard = event.target.closest(".group__rectangle")
@@ -122,12 +122,12 @@ const fullscreenPopupHandler = (event) => {
     setFullscreenPopupValues(fullScreenImageSrc, fullScreenImageCaption);
     openPopup(popupFullscreen);
     popupCloseFullscreen.addEventListener("click", closeFullscreenPopup);
-    popupFullscreenImageOverlay.addEventListener("click", closePopupsByOverlayClickHandler);
+    popupFullscreenImageOverlay.addEventListener("click", handleClosePopupsByClickOverlay);
     document.addEventListener("keydown", popupCloseByEscHandler);
 }
 const closeFullscreenPopup = () => {
     popupCloseFullscreen.removeEventListener("click", closeFullscreenPopup);
-    popupFullscreenImageOverlay.removeEventListener("click", closePopupsByOverlayClickHandler);
+    popupFullscreenImageOverlay.removeEventListener("click", handleClosePopupsByClickOverlay);
     document.removeEventListener("keydown", popupCloseByEscHandler);
     closePopup(popupFullscreen);
 }

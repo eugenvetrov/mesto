@@ -23,22 +23,22 @@ const likeIcon = renderingCard.querySelector(".group__like-icon");
 const trashIcon = renderingCard.querySelector(".group__delete-icon");
 const cardImage = renderingCard.querySelector(".group__image");
 
-const likeIconHandler = (event) => {
+const handleLikeIcon = (event) => {
     event.preventDefault;
     const like = event.target;
     like.classList.toggle("group__like-icon_active");
 }
 
-likeIcon.addEventListener("click", likeIconHandler);
+likeIcon.addEventListener("click", handleLikeIcon);
 
-const trashIconHandler = (event) => {
+const handleTrashIcon = (event) => {
     event.preventDefault;
     const cardForDelete = event.target.closest(".group__rectangle");
     cardForDelete.remove();
 }
 
-cardImage.addEventListener("click", fullscreenPopupHandler);
-trashIcon.addEventListener("click", trashIconHandler);
+cardImage.addEventListener("click", handlePopupFullscreenImage);
+trashIcon.addEventListener("click", handleTrashIcon);
 
 return renderingCard;
 }
