@@ -2,11 +2,13 @@ const submitForm = (event) => {
     event.preventDefault;
 }
 
-const showError = (input, errorContainer, errorText, {inputErrorClass, errorClass}) => {
+const showError = (input, errorContainer, errorText, {inputErrorClass, errorClass}, isFormValid) => {
+    if(isFormValid){
+        errorText = '';
+    }
     input.classList.add(inputErrorClass);
     errorContainer.classList.add(errorClass);
     errorContainer.textContent = errorText;
-    console.log(input.validationMessage)
 }
 
 const hideError = (input, errorContainer, {inputErrorClass, errorClass}) => {
@@ -28,7 +30,6 @@ const enableSubmit = (submitButton, inactiveButtonClass) => {
 const toggleButton = (form, {submitButtonSelector, inactiveButtonClass}) => {
     const submit = form.querySelector(submitButtonSelector);
     const isFormValid = form.checkValidity();
-    console.log(isFormValid);
     if (isFormValid) {
         enableSubmit(submit, inactiveButtonClass);
     } else {
@@ -37,14 +38,13 @@ const toggleButton = (form, {submitButtonSelector, inactiveButtonClass}) => {
 }
 
 const validateInput = (form, input, {submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass}) => {
-    console.log(input.validity.valid);
     const errorContainer = form.querySelector(`#${input.id}-error`);
-    let errorText = input.validationMessage;
-    console.log(errorContainer);
-    if (input.validity.valid) {
+    const isFormValid = input.validity.valid;
+    if (isFormValid) {
         hideError(input, errorContainer, {inputErrorClass, errorClass});
       } else {
-        showError(input, errorContainer, errorText, {inputErrorClass, errorClass});
+        let errorText = input.validationMessage;
+        showError(input, errorContainer, errorText, {inputErrorClass, errorClass}, isFormValid);
       }
     toggleButton(form, {submitButtonSelector, inactiveButtonClass})
 }
@@ -67,12 +67,14 @@ const enableValidation = ({formSelector,
         const inputs = form.querySelectorAll(inputSelector);
         inputs.forEach((input) => {
             const validateInputHandler = () => {
-                validateInput(form, input, {submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass});
+                validateInput(form,
+                              input,
+                              {submitButtonSelector,
+                               inactiveButtonClass,
+                               inputErrorClass,
+                               errorClass});
             }
             input.addEventListener("input", validateInputHandler);
-            /*input.addEventListener("keydown", popupCloseByEscProfileHandler);
-            input.addEventListener("keydown", popupCloseByEscCardHandler);
-            input.addEventListener("keydown", popupCloseByEscFullscreenHandler)*/
         })
     })
     

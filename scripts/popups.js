@@ -2,8 +2,14 @@ const openPopup = (kindOfPopup) => {
     kindOfPopup.classList.add("popup_opened");
 }
 
+const cleanErrorsInsidePopup = (kindOfPopup) => {
+    const errorsInsidePopup = Array.from(kindOfPopup.querySelectorAll(".popup__error"));
+    errorsInsidePopup.forEach(input => input.textContent = '')
+}
+
 const closePopup = (kindOfPopup) => {
     kindOfPopup.classList.remove("popup_opened");
+    cleanErrorsInsidePopup(kindOfPopup)
 }
 
 const setOpeningProfilePopupValues = () => {
@@ -34,24 +40,12 @@ const profileEditSubmitHandler = (event) => {
     setTextEditProfilePopup(popupEditProfileName, popupEditProfileDescription);
     closePopup(popupProfile);
 }
+
 editButton.addEventListener("click", openAndSetProfilePopup);  
 profileEditSubmit.addEventListener("submit", profileEditSubmitHandler);  
 popupCloseProfile.addEventListener("click", popupCloseProfileHandler);
 document.addEventListener("keydown", popupCloseByEscProfileHandler);
-document.addEventListener(
-    "click",
-    function(event) {
-        console.log("Hello");
-      if (event.target.classList.contains("popup_background_form")
-       || event.target.classList.contains("popup_background_fullscreen")
-      ) {
-        console.log("World");
-        popupCloseProfileHandler();
-        closePopupCard();
-        closeFullscreenPopup()
-      }
-    }
-  )
+
 
 const setOpeningCardPopupValue = () => {
     cardNameEdit.value = '';
@@ -114,3 +108,15 @@ const popupCloseByEscFullscreenHandler = (event) => {
 }
 popupCloseFullscreen.addEventListener("click", closeFullscreenPopup);
 document.addEventListener("keydown", popupCloseByEscFullscreenHandler);
+
+const closePopupsByOverlayClickHandler = (event) => {
+    if (event.target.classList.contains("popup_background_form")
+       || event.target.classList.contains("popup_background_fullscreen")
+      ) {
+        popupCloseProfileHandler();
+        closePopupCard();
+        closeFullscreenPopup()
+      }
+}
+
+document.addEventListener("click", closePopupsByOverlayClickHandler)
