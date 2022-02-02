@@ -1,8 +1,10 @@
 const openPopup = (kindOfPopup) => {
     kindOfPopup.classList.add("popup_opened");
+    document.addEventListener("keydown", handleClosePopupByEsc); 
 }
 
 const closePopup = (kindOfPopup) => {
+    document.removeEventListener("keydown", handleClosePopupByEsc); 
     kindOfPopup.classList.remove("popup_opened");
     cleanErrorsInsidePopup(kindOfPopup);
 }
@@ -21,45 +23,37 @@ const handleClosePopupByEsc = (event) => {
 
 const handleClosePopupsByClickOverlay = (event) => {
     if (event.target.classList.contains("popup_background_form")
-       || event.target.classList.contains("popup_background_fullscreen")
-      ) {
+       || event.target.classList.contains("popup_background_fullscreen"))
+        {
         handleClosePopupProfile();
         handleClosePopupCard();
         handleCloseFullscreenPopup()
-      }
+        }
 }
 
 const setOpeningProfilePopupValues = () => {
     popupEditProfileName.value = profileName.textContent;
     popupEditProfileDescription.value = profileDescription.textContent;
 }
-const openProfilePopup = () => {
-    openPopup(popupProfile);
-    document.addEventListener("keydown", handleClosePopupByEsc);
-}
-const openAndSetProfilePopup = () => {
+const handleOpenProfilePopup = () => {
     setOpeningProfilePopupValues();
-    openProfilePopup();
+    openPopup(popupProfile);
 }
-const handleClosePopupProfile = (event) => {
-    document.removeEventListener("keydown", handleClosePopupByEsc);
+const handleClosePopupProfile = () => {
     closePopup(popupProfile);
 }
-
 const setTextEditProfilePopup = (name, description) => {
     profileName.textContent = name.value;
     profileDescription.textContent = description.value;
 }
 const handleSubmitEditProfile = (event) => {
     event.preventDefault();
-    editButton.addEventListener("click", openAndSetProfilePopup); 
     setTextEditProfilePopup(popupEditProfileName, popupEditProfileDescription);
     closePopup(popupProfile);
 }
-
-editButton.addEventListener("click", openAndSetProfilePopup);
+editButton.addEventListener("click", handleOpenProfilePopup);
 profileEditSubmit.addEventListener("submit", handleSubmitEditProfile);
-popupCloseProfile.addEventListener("click", handleClosePopupProfile);
+popupCloseProfileIcon.addEventListener("click", handleClosePopupProfile);
 popupProfileOverlay.addEventListener("click", handleClosePopupsByClickOverlay)
 
 
@@ -67,16 +61,11 @@ const setOpeningCardPopupValue = () => {
     cardNameEdit.value = '';
     cardLinkEdit.value = '';
 }
-const openCardPopup = () => {
-    openPopup(popupCard);
-    document.addEventListener("keydown", handleClosePopupByEsc); 
-}
-const openAndSetCardPopup = () => {
-    openCardPopup();
+const handleOpenCardPopup = () => {
     setOpeningCardPopupValue();
+    openPopup(popupCard);
 }
 const handleClosePopupCard = () => {
-    document.removeEventListener("keydown", handleClosePopupByEsc); 
     closePopup(popupCard);
 }
 const setCardNewItem = (name, link) => {
@@ -85,38 +74,36 @@ const setCardNewItem = (name, link) => {
         link: link.value,
     }
 }
-const addNewCard = (event) => {
+const handleSubmitAddNewCard = (event) => {
     event.preventDefault();
-    addButton.addEventListener("click", openAndSetCardPopup);  
     addCardToBegin(setCardNewItem(cardNameEdit, cardLinkEdit));
     handleClosePopupCard();
 }
-addButton.addEventListener("click", openAndSetCardPopup);
-cardAddSubmit.addEventListener("submit", addNewCard);  
-popupCloseCard.addEventListener("click", handleClosePopupCard);
+cardAddButton.addEventListener("click", handleOpenCardPopup);
+cardAddSubmit.addEventListener("submit", handleSubmitAddNewCard);  
+popupCloseCardIcon.addEventListener("click", handleClosePopupCard);
 popupCardOverlay.addEventListener("click", handleClosePopupsByClickOverlay);
 
 
-const handlePopupFullscreenImage = (event) => {
+const setFullscreenPopupValues = (src, caption) => {
+    popupFullImage.src = src;
+    popupFullImageCaption.textContent = caption;
+    popupFullImage.alt = caption;
+}
+
+const handleOpenPopupFullscreenImage = (event) => {
 
     const fullscreenOpeningImage = event.target;
     const fullscreenOpeningImageCard = event.target.closest(".group__rectangle")
     const fullScreenImageSrc = fullscreenOpeningImage.src;
     const fullScreenImageCaption = fullscreenOpeningImageCard.querySelector(".group__name").textContent;
 
-    const setFullscreenPopupValues = (src, caption) => {
-        popupFullImage.src = src;
-        popupFullImageCaption.textContent = caption;
-        popupFullImage.alt = caption;
-    }
     setFullscreenPopupValues(fullScreenImageSrc, fullScreenImageCaption);
     openPopup(popupFullscreen);
-    document.addEventListener("keydown", handleClosePopupByEsc);
 }
 const handleCloseFullscreenPopup = () => {
-    document.removeEventListener("keydown", handleClosePopupByEsc);
     closePopup(popupFullscreen);
 }
 
-popupCloseFullscreen.addEventListener("click", handleCloseFullscreenPopup);
+popupFullscreenCloseIcon.addEventListener("click", handleCloseFullscreenPopup);
 popupFullscreenImageOverlay.addEventListener("click", handleClosePopupsByClickOverlay);

@@ -36,7 +36,7 @@ const renderCard = (element) => {
         cardForDelete.remove();
     }
     
-    cardImage.addEventListener("click", handlePopupFullscreenImage);
+    cardImage.addEventListener("click", handleOpenPopupFullscreenImage);
     trashIcon.addEventListener("click", handleTrashIcon);
     
     return renderingCard;
