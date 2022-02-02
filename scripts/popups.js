@@ -12,7 +12,7 @@ const cleanErrorsInsidePopup = (kindOfPopup) => {
     errorsInsidePopup.forEach(input => input.textContent = '')
 }
 
-const popupCloseByEscHandler = (event) => {
+const handleClosePopupByEsc = (event) => {
     const activePopup = document.querySelector(".popup_opened")
     if(event.key === 'Escape') {
         if(activePopup.classList.contains("popup_profile")) {
@@ -41,20 +41,22 @@ const setOpeningProfilePopupValues = () => {
 }
 const openProfilePopup = () => {
     openPopup(popupProfile);
+    editButton.removeEventListener("click", openAndSetProfilePopup);  
     profileEditSubmit.addEventListener("submit", handleSubmitEditProfile);
     popupCloseProfile.addEventListener("click", handleClosePopupProfile);
     popupProfileOverlay.addEventListener("click", handleClosePopupsByClickOverlay)
-    document.addEventListener("keydown", popupCloseByEscHandler);
+    document.addEventListener("keydown", handleClosePopupByEsc);
 }
 const openAndSetProfilePopup = () => {
     setOpeningProfilePopupValues();
     openProfilePopup();
 }
 const handleClosePopupProfile = (event) => {
+    editButton.addEventListener("click", openAndSetProfilePopup);  
     profileEditSubmit.removeEventListener("submit", handleSubmitEditProfile);
     popupCloseProfile.removeEventListener("click", handleClosePopupProfile);
     popupProfileOverlay.removeEventListener("click", handleClosePopupsByClickOverlay);
-    document.removeEventListener("keydown", popupCloseByEscHandler);
+    document.removeEventListener("keydown", handleClosePopupByEsc);
     closePopup(popupProfile);
 }
 
@@ -64,6 +66,7 @@ const setTextEditProfilePopup = (name, description) => {
 }
 const handleSubmitEditProfile = (event) => {
     event.preventDefault();
+    editButton.addEventListener("click", openAndSetProfilePopup); 
     setTextEditProfilePopup(popupEditProfileName, popupEditProfileDescription);
     closePopup(popupProfile);
 }
@@ -77,20 +80,22 @@ const setOpeningCardPopupValue = () => {
 }
 const openCardPopup = () => {
     openPopup(popupCard);
+    addButton.removeEventListener("click", openAndSetCardPopup);  
     cardAddSubmit.addEventListener("submit", addNewCard);  
     popupCloseCard.addEventListener("click", closePopupCard);
     popupCardOverlay.addEventListener("click", handleClosePopupsByClickOverlay);
-    document.addEventListener("keydown", popupCloseByEscHandler); 
+    document.addEventListener("keydown", handleClosePopupByEsc); 
 }
 const openAndSetCardPopup = () => {
     openCardPopup();
     setOpeningCardPopupValue();
 }
 const closePopupCard = () => {
+    addButton.addEventListener("click", openAndSetCardPopup);  
     cardAddSubmit.removeEventListener("submit", addNewCard);  
     popupCloseCard.removeEventListener("click", closePopupCard);
     popupCardOverlay.removeEventListener("click", handleClosePopupsByClickOverlay);
-    document.removeEventListener("keydown", popupCloseByEscHandler); 
+    document.removeEventListener("keydown", handleClosePopupByEsc); 
     closePopup(popupCard);
 }
 const setCardNewItem = (name, link) => {
@@ -101,6 +106,7 @@ const setCardNewItem = (name, link) => {
 }
 const addNewCard = (event) => {
     event.preventDefault();
+    addButton.addEventListener("click", openAndSetCardPopup);  
     addCardToBegin(setCardNewItem(cardNameEdit, cardLinkEdit));
     closePopupCard();
 }
@@ -123,12 +129,12 @@ const handlePopupFullscreenImage = (event) => {
     openPopup(popupFullscreen);
     popupCloseFullscreen.addEventListener("click", closeFullscreenPopup);
     popupFullscreenImageOverlay.addEventListener("click", handleClosePopupsByClickOverlay);
-    document.addEventListener("keydown", popupCloseByEscHandler);
+    document.addEventListener("keydown", handleClosePopupByEsc);
 }
 const closeFullscreenPopup = () => {
     popupCloseFullscreen.removeEventListener("click", closeFullscreenPopup);
     popupFullscreenImageOverlay.removeEventListener("click", handleClosePopupsByClickOverlay);
-    document.removeEventListener("keydown", popupCloseByEscHandler);
+    document.removeEventListener("keydown", handleClosePopupByEsc);
     closePopup(popupFullscreen);
 }
 
