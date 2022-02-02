@@ -1,10 +1,10 @@
 const openPopup = (kindOfPopup) => {
     kindOfPopup.classList.add("popup_opened");
-    document.addEventListener("keydown", handleClosePopupByEsc); 
+    document.addEventListener("keydown", handleClosePopupsByEsc); 
 }
 
 const closePopup = (kindOfPopup) => {
-    document.removeEventListener("keydown", handleClosePopupByEsc); 
+    document.removeEventListener("keydown", handleClosePopupsByEsc); 
     kindOfPopup.classList.remove("popup_opened");
     cleanErrorsInsidePopup(kindOfPopup);
 }
@@ -14,7 +14,7 @@ const cleanErrorsInsidePopup = (kindOfPopup) => {
     errorsInsidePopup.forEach(input => input.textContent = '')
 }
 
-const handleClosePopupByEsc = (event) => {
+const handleClosePopupsByEsc = (event) => {
     const activePopup = document.querySelector(".popup_opened")
     if(event.key === 'Escape'){
         closePopup(activePopup);
@@ -25,8 +25,8 @@ const handleClosePopupsByClickOverlay = (event) => {
     if (event.target.classList.contains("popup_background_form")
        || event.target.classList.contains("popup_background_fullscreen"))
         {
-        handleClosePopupProfile();
-        handleClosePopupCard();
+        handleCloseProfilePopup();
+        handleCloseCardPopup();
         handleCloseFullscreenPopup()
         }
 }
@@ -39,7 +39,7 @@ const handleOpenProfilePopup = () => {
     setOpeningProfilePopupValues();
     openPopup(popupProfile);
 }
-const handleClosePopupProfile = () => {
+const handleCloseProfilePopup = () => {
     closePopup(popupProfile);
 }
 const setTextEditProfilePopup = (name, description) => {
@@ -49,11 +49,11 @@ const setTextEditProfilePopup = (name, description) => {
 const handleSubmitEditProfile = (event) => {
     event.preventDefault();
     setTextEditProfilePopup(popupEditProfileName, popupEditProfileDescription);
-    closePopup(popupProfile);
+    handleCloseProfilePopup();
 }
 editButton.addEventListener("click", handleOpenProfilePopup);
 profileEditSubmit.addEventListener("submit", handleSubmitEditProfile);
-popupCloseProfileIcon.addEventListener("click", handleClosePopupProfile);
+popupCloseProfileIcon.addEventListener("click", handleCloseProfilePopup);
 popupProfileOverlay.addEventListener("click", handleClosePopupsByClickOverlay)
 
 
@@ -65,7 +65,7 @@ const handleOpenCardPopup = () => {
     setOpeningCardPopupValue();
     openPopup(popupCard);
 }
-const handleClosePopupCard = () => {
+const handleCloseCardPopup = () => {
     closePopup(popupCard);
 }
 const setCardNewItem = (name, link) => {
@@ -77,11 +77,11 @@ const setCardNewItem = (name, link) => {
 const handleSubmitAddNewCard = (event) => {
     event.preventDefault();
     addCardToBegin(setCardNewItem(cardNameEdit, cardLinkEdit));
-    handleClosePopupCard();
+    handleCloseCardPopup();
 }
 cardAddButton.addEventListener("click", handleOpenCardPopup);
 cardAddSubmit.addEventListener("submit", handleSubmitAddNewCard);  
-popupCloseCardIcon.addEventListener("click", handleClosePopupCard);
+popupCloseCardIcon.addEventListener("click", handleCloseCardPopup);
 popupCardOverlay.addEventListener("click", handleClosePopupsByClickOverlay);
 
 
