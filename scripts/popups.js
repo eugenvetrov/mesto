@@ -18,9 +18,9 @@ const handleClosePopupByEsc = (event) => {
         if(activePopup.classList.contains("popup_profile")) {
             handleClosePopupProfile();
         } else if(activePopup.classList.contains("popup_card-add")) {
-            closePopupCard();
+            handleClosePopupCard();
         } else if(activePopup.classList.contains("popup_fullscreen-image")) {
-            closeFullscreenPopup();
+            handleCloseFullscreenPopup();
         }
     }
 }
@@ -30,8 +30,8 @@ const handleClosePopupsByClickOverlay = (event) => {
        || event.target.classList.contains("popup_background_fullscreen")
       ) {
         handleClosePopupProfile();
-        closePopupCard();
-        closeFullscreenPopup()
+        handleClosePopupCard();
+        handleCloseFullscreenPopup()
       }
 }
 
@@ -82,7 +82,7 @@ const openCardPopup = () => {
     openPopup(popupCard);
     addButton.removeEventListener("click", openAndSetCardPopup);  
     cardAddSubmit.addEventListener("submit", addNewCard);  
-    popupCloseCard.addEventListener("click", closePopupCard);
+    popupCloseCard.addEventListener("click", handleClosePopupCard);
     popupCardOverlay.addEventListener("click", handleClosePopupsByClickOverlay);
     document.addEventListener("keydown", handleClosePopupByEsc); 
 }
@@ -90,10 +90,10 @@ const openAndSetCardPopup = () => {
     openCardPopup();
     setOpeningCardPopupValue();
 }
-const closePopupCard = () => {
+const handleClosePopupCard = () => {
     addButton.addEventListener("click", openAndSetCardPopup);  
     cardAddSubmit.removeEventListener("submit", addNewCard);  
-    popupCloseCard.removeEventListener("click", closePopupCard);
+    popupCloseCard.removeEventListener("click", handleClosePopupCard);
     popupCardOverlay.removeEventListener("click", handleClosePopupsByClickOverlay);
     document.removeEventListener("keydown", handleClosePopupByEsc); 
     closePopup(popupCard);
@@ -108,7 +108,7 @@ const addNewCard = (event) => {
     event.preventDefault();
     addButton.addEventListener("click", openAndSetCardPopup);  
     addCardToBegin(setCardNewItem(cardNameEdit, cardLinkEdit));
-    closePopupCard();
+    handleClosePopupCard();
 }
 addButton.addEventListener("click", openAndSetCardPopup);  
 
@@ -127,12 +127,12 @@ const handlePopupFullscreenImage = (event) => {
     }
     setFullscreenPopupValues(fullScreenImageSrc, fullScreenImageCaption);
     openPopup(popupFullscreen);
-    popupCloseFullscreen.addEventListener("click", closeFullscreenPopup);
+    popupCloseFullscreen.addEventListener("click", handleCloseFullscreenPopup);
     popupFullscreenImageOverlay.addEventListener("click", handleClosePopupsByClickOverlay);
     document.addEventListener("keydown", handleClosePopupByEsc);
 }
-const closeFullscreenPopup = () => {
-    popupCloseFullscreen.removeEventListener("click", closeFullscreenPopup);
+const handleCloseFullscreenPopup = () => {
+    popupCloseFullscreen.removeEventListener("click", handleCloseFullscreenPopup);
     popupFullscreenImageOverlay.removeEventListener("click", handleClosePopupsByClickOverlay);
     document.removeEventListener("keydown", handleClosePopupByEsc);
     closePopup(popupFullscreen);
