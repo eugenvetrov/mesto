@@ -1,49 +1,51 @@
-import { handleOpenPopupFullscreenImage } from "./index.js";
-
 export default class Card {
-    constructor(element, cardSelector){
-        this.name = element.name;
-        this.link = element.link;
-        this.cardSelector = cardSelector;
+    constructor(element, cardSelector, handleCardClick){
+        this._name = element.name;
+        this._link = element.link;
+        this._cardSelector = cardSelector;
+        this._handleCardClick = handleCardClick;
     }
 
     _makeCloneTemplateForCard() {
-        const cardTemplate = document.querySelector("#group__cards").content.cloneNode(true);
-        return cardTemplate;
+        this._cardTemplate = document.querySelector(this._cardSelector).content.cloneNode(true);
+        return this._cardTemplate;
     }
 
     _makeCard() {
-        const card = this._makeCloneTemplateForCard();
-        card.querySelector('.group__image').src = this.link;
-        card.querySelector('.group__name').textContent = this.name;
-        card.querySelector('.group__image').alt = this.name;
-        return card;
+        this._element = this._makeCloneTemplateForCard();
+        this._cardImage = this._element.querySelector('.group__image');
+        this._cardImage.src = this._link;
+        this._cardName = this._element.querySelector('.group__name')
+        this._cardName.textContent = this._name;
+        this._cardImage.alt = this._name;
     }
 
     getCard() {
+        
+        this._makeCard();
+        this._setEventListeners();
+        
+        return this._element;
+    }
 
-        const renderingCard = this._makeCard();
-        const likeIcon = renderingCard.querySelector(".group__like-icon");
-        const trashIcon = renderingCard.querySelector(".group__delete-icon");
-        const cardImage = renderingCard.querySelector(".group__image");
+    _setEventListeners() {
+        this._likeIcon = this._element.querySelector(".group__like-icon");
+        this._trashIcon = this._element.querySelector(".group__delete-icon");
         
         const handleLikeIcon = (event) => {
-            event.preventDefault;
             const like = event.target;
             like.classList.toggle("group__like-icon_active");
         }
         
-        likeIcon.addEventListener("click", handleLikeIcon);
-        
         const handleTrashIcon = (event) => {
-            event.preventDefault;
             const cardForDelete = event.target.closest(".group__rectangle");
             cardForDelete.remove();
         }
         
-        cardImage.addEventListener("click", handleOpenPopupFullscreenImage);
-        trashIcon.addEventListener("click", handleTrashIcon);
-        
-        return renderingCard;
+        this._likeIcon.addEventListener("click", handleLikeIcon);
+        this._cardImage.addEventListener('click', () => {
+            this._handleCardClick(this._name, this._link)
+          });
+        this._trashIcon.addEventListener("click", handleTrashIcon);
     }
 }
