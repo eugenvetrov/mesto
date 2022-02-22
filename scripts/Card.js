@@ -20,8 +20,7 @@ export default class Card {
         this._cardImage.alt = this._name;
     }
 
-    getCard() {
-        
+    getCard(){
         this._makeCard();
         this._setEventListeners();
         
