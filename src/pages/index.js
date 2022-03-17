@@ -1,10 +1,9 @@
-import Card from "./Card.js";
-import FormValidator from "./FormValidator.js";
-import Popup from "./Popup.js";
-import PopupWithForm from "./PopupWithForm.js";
-import PopupWithImage from "./PopupWithImage.js";
-import Section from "./Section.js";
-import UserInfo from "./UserInfo.js";
+import Card from "../components/Card.js";
+import FormValidator from "../components/FormValidator.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import Section from "../components/Section.js";
+import UserInfo from "../components/UserInfo.js";
 
 /* Переменные для базовых действий с попапами */
 const editButton = document.querySelector(".profile__info-edit");
@@ -13,11 +12,6 @@ const cardAddButton = document.querySelector(".profile__add");
 /* Переменные для редактирования профиля через попап */
 const popupEditProfileName = document.querySelector(".popup__text_profile-name");
 const popupEditProfileDescription = document.querySelector(".popup__text_profile-description");
-
-/* Переменные для попапа с большими изображениями из карт */
-const popupFullscreen = document.querySelector(".popup_fullscreen-image");
-const popupFullImage = document.querySelector(".popup__fullscreen-image");
-const popupFullImageCaption = document.querySelector(".popup__fullscreen-caption");
 
 const cardsArray = [
     {
@@ -81,7 +75,6 @@ const popupProfileObject = new PopupWithForm({selector: '.popup_profile', handle
                                             }});
 
 const popupCardObject = new PopupWithForm({selector: '.popup_card-add', handleFormSubmit: (element) => {
-                                             console.log(element);
                                              const card = new Card(element, "#group__cards", handleCardClick);
                                              initialCardsArray.addItem(card.getCard(), true);
                                              popupCardObject.close();                  

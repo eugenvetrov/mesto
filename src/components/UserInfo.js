@@ -12,7 +12,6 @@ export default class UserInfo {
     }
 
     setUserInfo(data) {
-        console.log(data);
         this._userName.textContent = data.username;
         this._userInfo.textContent = data.userinfo;
     }
