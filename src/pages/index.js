@@ -1,3 +1,4 @@
+import './index.css';
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import PopupWithForm from "../components/PopupWithForm.js";
@@ -13,30 +14,37 @@ const cardAddButton = document.querySelector(".profile__add");
 const popupEditProfileName = document.querySelector(".popup__text_profile-name");
 const popupEditProfileDescription = document.querySelector(".popup__text_profile-description");
 
+import KomiImg from '../images/respublika_comi.jpg';
+import BaikalImg from '../images/baikal-lake.jpg';
+import KamchatkaImg from '../images/kamchatka.jpg';
+import OnegaImg from '../images/onega-lake.jpg';
+import MonrepoImg from '../images/park-monrepo.jpg';
+import TulinovkaImg from '../images/respublika_comi.jpg';
+
 const cardsArray = [
     {
         cardname: 'Республика Коми',
-        cardlink: './images/respublika_comi.jpg'
+        cardlink: KomiImg
     },
     {
         cardname: 'Озеро Байкал',
-        cardlink: './images/baikal-lake.jpg'
+        cardlink: BaikalImg
     },
     {
         cardname: 'Камчатка',
-        cardlink: './images/kamchatka.jpg'
+        cardlink: KamchatkaImg
     },
     {
         cardname: 'Онежское озеро',
-        cardlink: './images/onega-lake.jpg'
+        cardlink: OnegaImg
     },
     {
         cardname: 'Парк Монрепо',
-        cardlink: './images/park-monrepo.jpg'
+        cardlink: MonrepoImg
     },
     {
         cardname: 'Тулиновка',
-        cardlink: './images/tulinovka.jpg'
+        cardlink: TulinovkaImg
     }
 ]
 
@@ -93,10 +101,12 @@ popupProfileObject.setEventListeners();
 popupCardObject.setEventListeners();
 popupFullImageObject.setEventListeners();
 editButton.addEventListener('mousedown', () => {
+    formValidators['profile-form'].resetValidation();
     popupEditProfileName.value = user.getUserInfo().username;
     popupEditProfileDescription.value = user.getUserInfo().userinfo;
     popupProfileObject.open();
 })
 cardAddButton.addEventListener('mousedown', () => {
+    formValidators['card-form'].resetValidation();
     popupCardObject.open();
 })

@@ -4,16 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="./pages/index.css" rel="stylesheet" type="text/css">
     <title>Mesto</title>
 </head>
 <body class="page">
     <header class="header">
-        <img src="images/logo-white.svg" class="header__logo" alt="Место Россия логотип">
+        <img src="<%=require('./images/logo-white.svg')%>" class="header__logo" alt="Место Россия логотип">
     </header>
     <main class="main">
     <section class="profile">
-        <img src="./images/jacques-yves-cousteau.jpeg" class="profile__avatar" alt="аватар профиля">
+        <img src="<%=require('./images/jacques-yves-cousteau.jpeg')%>" class="profile__avatar" alt="аватар профиля">
         <h1 class="profile__info-name">Жак Ив Кусто</h1>
         <button class="profile__info-edit" type="button"></button>
         <p class="profile__info-description">Исследователь океана</p>
@@ -83,13 +82,12 @@
     <div class="popup popup_background_fullscreen popup_fullscreen-image">
         <figure class="popup__fullscreen">
             <button class="popup__close-icon popup__close-icon_fullscreen" type="button"></button>
-            <img class="popup__fullscreen-image" src="./images/fullscreen-picture-default.svg" alt="Изображение в полноэкранном режиме">
+            <img class="popup__fullscreen-image" src="<%=require('./images/fullscreen-picture-default.svg')%>" alt="Изображение в полноэкранном режиме">
             <figcaption class="popup__fullscreen-caption"></figcaption>
         </figure>
     </div>
     <footer class="footer">
         <p class="footer__copy">&copy; 2020 Mesto Russia</p>
     </footer>
-    <script type="module" src="./pages/index.js"></script>
 </body>
 </html>
