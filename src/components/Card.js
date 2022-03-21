@@ -20,31 +20,33 @@ export default class Card {
         this._cardImage.alt = this._name;
     }
 
-    getCard(){
-        this._makeCard();
-        this._setEventListeners();
-        
-        return this._element;
+    _handleLikeIcon(event) {
+        const like = event.target;
+        like.classList.toggle("group__like-icon_active");
+    } 
+
+    _handleTrashIcon(event) {
+        const cardForDelete = event.target.closest(".group__rectangle");
+        cardForDelete.remove();
     }
 
     _setEventListeners() {
         this._likeIcon = this._element.querySelector(".group__like-icon");
         this._trashIcon = this._element.querySelector(".group__delete-icon");
         
-        const handleLikeIcon = (event) => {
-            const like = event.target;
-            like.classList.toggle("group__like-icon_active");
-        }
         
-        const handleTrashIcon = (event) => {
-            const cardForDelete = event.target.closest(".group__rectangle");
-            cardForDelete.remove();
-        }
         
-        this._likeIcon.addEventListener("click", handleLikeIcon);
+        this._likeIcon.addEventListener("click", this._handleLikeIcon);
         this._cardImage.addEventListener('click', () => {
             this._handleCardClick({name: this._name, link: this._link})
           });
-        this._trashIcon.addEventListener("click", handleTrashIcon);
+        this._trashIcon.addEventListener("click", this._handleTrashIcon);
+    }
+
+    getCard(){
+        this._makeCard();
+        this._setEventListeners();
+        
+        return this._element;
     }
 }

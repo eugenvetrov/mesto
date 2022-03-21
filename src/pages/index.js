@@ -5,6 +5,7 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
+import { cardsArray } from "../utils/constants.js";
 
 /* Переменные для базовых действий с попапами */
 const editButton = document.querySelector(".profile__info-edit");
@@ -13,40 +14,6 @@ const cardAddButton = document.querySelector(".profile__add");
 /* Переменные для редактирования профиля через попап */
 const popupEditProfileName = document.querySelector(".popup__text_profile-name");
 const popupEditProfileDescription = document.querySelector(".popup__text_profile-description");
-
-import KomiImg from '../images/respublika_comi.jpg';
-import BaikalImg from '../images/baikal-lake.jpg';
-import KamchatkaImg from '../images/kamchatka.jpg';
-import OnegaImg from '../images/onega-lake.jpg';
-import MonrepoImg from '../images/park-monrepo.jpg';
-import TulinovkaImg from '../images/respublika_comi.jpg';
-
-const cardsArray = [
-    {
-        cardname: 'Республика Коми',
-        cardlink: KomiImg
-    },
-    {
-        cardname: 'Озеро Байкал',
-        cardlink: BaikalImg
-    },
-    {
-        cardname: 'Камчатка',
-        cardlink: KamchatkaImg
-    },
-    {
-        cardname: 'Онежское озеро',
-        cardlink: OnegaImg
-    },
-    {
-        cardname: 'Парк Монрепо',
-        cardlink: MonrepoImg
-    },
-    {
-        cardname: 'Тулиновка',
-        cardlink: TulinovkaImg
-    }
-]
 
 const config = {
     formSelector: '.popup__form',
@@ -71,6 +38,11 @@ const enableValidation = (config) => {
 
 enableValidation(config);
 
+function createCard(element) {
+    const cardElement = new Card(element, "#group__cards", handleCardClick);
+    return cardElement;
+}
+
 const handleCardClick = (data) => {
     popupFullImageObject.open(data)
 }
@@ -83,14 +55,14 @@ const popupProfileObject = new PopupWithForm({selector: '.popup_profile', handle
                                             }});
 
 const popupCardObject = new PopupWithForm({selector: '.popup_card-add', handleFormSubmit: (element) => {
-                                             const card = new Card(element, "#group__cards", handleCardClick);
-                                             initialCardsArray.addItem(card.getCard(), true);
-                                             popupCardObject.close();                  
-                                         }});
+                                                                        const card = createCard(element);
+                                                                        initialCardsArray.addItem(card.getCard(), true);
+                                                                        popupCardObject.close();
+                                                                    }});
 
 const initialCardsArray = new Section({items: cardsArray,
                                        renderer: (element) => { 
-                                           const card = new Card(element, "#group__cards", handleCardClick);
+                                           const card = createCard(element);
                                            initialCardsArray.addItem(card.getCard());
                                     }}, '.group');
                                     
@@ -100,13 +72,14 @@ initialCardsArray.renderItems();
 popupProfileObject.setEventListeners();
 popupCardObject.setEventListeners();
 popupFullImageObject.setEventListeners();
-editButton.addEventListener('mousedown', () => {
+editButton.addEventListener('click', () => {
     formValidators['profile-form'].resetValidation();
-    popupEditProfileName.value = user.getUserInfo().username;
-    popupEditProfileDescription.value = user.getUserInfo().userinfo;
+    const {userName, userInfo} = user.getUserInfo()
+    popupEditProfileName.value = userName;
+    popupEditProfileDescription.value = userInfo;
     popupProfileObject.open();
 })
-cardAddButton.addEventListener('mousedown', () => {
+cardAddButton.addEventListener('click', () => {
     formValidators['card-form'].resetValidation();
     popupCardObject.open();
 })
