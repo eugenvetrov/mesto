@@ -56,6 +56,22 @@
             </form>
         </div>
     </div>
+    <div class="popup popup_background_form popup_profile-avatar">
+        <div class="popup__container">
+            <button class="popup__close-icon popup__close-icon_profile" type="button"></button>
+            <form class="popup__form popup__form_profile-avatar" name="profile-avatar-form" autocomplete="off" novalidate>
+                <h2 class="popup__title">Обновить аватар</h2>
+                <input class="popup__text popup__text_profile-avatar"
+                     id="avatar-link"
+                     type="url"
+                     name="avatarLink"
+                     placeholder="Ссылка на аватар"
+                     required>
+                        <span class="popup__error" id="profile-avatar-error"></span>
+                <input class="popup__submit" type="submit" value="Сохранить">
+            </form>
+        </div>
+    </div>
     <div class="popup popup_background_form popup_card-add">
         <div class="popup__container popup__profile-container">
             <button class="popup__close-icon popup__close-icon_card-close" type="button"></button>
@@ -85,7 +101,7 @@
             <button class="popup__close-icon popup__close-icon_profile" type="button"></button>
             <form class="popup__form popup__form_delete-card" name="delete-card-form" autocomplete="off" novalidate>
                 <h2 class="popup__title">Вы уверены?</h2>
-                <button class="popup__submit">Да</button>
+                <input class="popup__submit" type="submit" value="Да">
             </form>
         </div>
     </div>
