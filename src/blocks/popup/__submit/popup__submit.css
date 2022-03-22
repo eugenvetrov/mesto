@@ -9,6 +9,7 @@
     border-radius: 2px;
     padding: 0;
     justify-content: center;
+    align-items: center;
 }
 
 .popup__submit:hover {
