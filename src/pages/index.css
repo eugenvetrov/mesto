@@ -18,6 +18,7 @@
 @import url(../blocks/group/__like/group__like.css);
 @import url(../blocks/group/__like-icon/group__like-icon.css);
 @import url(../blocks/group/__like-icon/_active/group__like-icon_active.css);
+@import url(../blocks/group/__like-number/group__like-number.css);
 @import url(../blocks/group/__name/group__name.css);
 @import url(../blocks/group/__rectangle/group__rectangle.css);
 @import url(../blocks/group/__delete-icon/group__delete-icon.css);

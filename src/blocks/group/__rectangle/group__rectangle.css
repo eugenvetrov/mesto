@@ -1,8 +1,9 @@
 .group__rectangle {
     display: grid;
     grid-template-areas: "image image"
-                         "name like";
-    grid-template-rows: 282px 79px;
+                         "name like"
+                         "name like-number";
+    grid-template-rows: 282px 40px 40px;
     grid-template-columns: 238px 44px;
     position: relative;
 }
