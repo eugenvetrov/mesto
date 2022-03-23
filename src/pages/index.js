@@ -5,7 +5,7 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
-import { cardsArray } from "../utils/constants.js";
+import Api from "../components/Api.js";
 
 /* Переменные для базовых действий с попапами */
 const editButton = document.querySelector(".profile__info-edit");
@@ -47,10 +47,21 @@ const handleCardClick = (data) => {
     popupFullImageObject.open(data)
 }
 
+const api = new Api('https://mesto.nomoreparties.co');
+
 const user = new UserInfo({nameSelector: '.profile__info-name', selfInfoSelector: '.profile__info-description'});
 
+api.getUserInfo()
+    .then((userInfo) => {
+        user.setUserInfo({name: userInfo.name, about: userInfo.about})
+    })
+
 const popupProfileObject = new PopupWithForm({selector: '.popup_profile', handleFormSubmit: (data) => {
-                                                user.setUserInfo(data);
+                                                api.setUserInfo(data.name, data.about)
+                                                .then(() => api.getUserInfo())
+                                                .then((userInfo) => {
+                                                    user.setUserInfo({name: userInfo.name, about: userInfo.about})
+                                                })
                                                 popupProfileObject.close();
                                             }});
 
@@ -60,7 +71,16 @@ const popupCardObject = new PopupWithForm({selector: '.popup_card-add', handleFo
                                                                         popupCardObject.close();
                                                                     }});
 
-const initialCardsArray = new Section({items: cardsArray,
+const initialCardsArray = new Section({items: api.getCards()
+                                                .then((cards) => {
+                                                    const cardsArray = cards.map((item) => {
+                                                        return {
+                                                            name: item.name,
+                                                            link: item.link
+                                                        }
+                                                    })
+                                                    return cardsArray;
+                                                }),
                                        renderer: (element) => { 
                                            const card = createCard(element);
                                            initialCardsArray.addItem(card.getCard());
@@ -74,9 +94,9 @@ popupCardObject.setEventListeners();
 popupFullImageObject.setEventListeners();
 editButton.addEventListener('click', () => {
     formValidators['profile-form'].resetValidation();
-    const {userName, userInfo} = user.getUserInfo()
-    popupEditProfileName.value = userName;
-    popupEditProfileDescription.value = userInfo;
+    const {name, about} = user.getUserInfo()
+    popupEditProfileName.value = name;
+    popupEditProfileDescription.value = about;
     popupProfileObject.open();
 })
 cardAddButton.addEventListener('click', () => {

@@ -14,9 +14,9 @@
     <section class="profile">
         <div class="profile__avatar-edit"></div>
         <img src="<%=require('./images/jacques-yves-cousteau.jpeg')%>" class="profile__avatar" alt="аватар профиля">
-        <h1 class="profile__info-name">Жак Ив Кусто</h1>
+        <h1 class="profile__info-name"></h1>
         <button class="profile__info-edit" type="button"></button>
-        <p class="profile__info-description">Исследователь океана</p>
+        <p class="profile__info-description"></p>
         <button class="profile__add" type="button"></button>
     </section>
     <section class="group">
@@ -40,14 +40,15 @@
                 <h2 class="popup__title">Редактировать профиль</h2>
                 <input class="popup__text popup__text_profile-name"
                        type="text"
-                       name="userName"
+                       name="name"
                        id="profile-name"
                        value=""
                        minlength="2" maxlength="40"
                        required>
                         <span class="popup__error" id="profile-name-error"></span>
                 <input class="popup__text popup__text_profile-description"
-                       type="text" name="userInfo"
+                       type="text"
+                       name="about"
                        id="profile-description"
                        value=""
                        minlength="2" maxlength="200"
@@ -81,7 +82,7 @@
                 <input class="popup__text popup__text_card-name"
                        id="card-name"
                        type="text"
-                       name="cardname"
+                       name="name"
                        placeholder="Название"
                        minlength="2" maxlength="30"
                        required>
@@ -89,7 +90,7 @@
                 <input class="popup__text popup__text_card-link"
                        id="card-link"
                        type="url"
-                       name="cardlink"
+                       name="link"
                        placeholder="Ссылка на картинку"
                        required>
                         <span class="popup__error" id="card-link-error"></span>
