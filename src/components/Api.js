@@ -48,4 +48,24 @@ export default class Api {
                 if(res.ok) return res.json();
             })
     }
+
+    addCard(card) {
+        return fetch(`${this._url}/cards`,
+                     {
+                         method: 'POST',
+                         headers: {
+                            authorization: this._headerAuth,
+                            'Content-Type': 'application/json'
+                         },
+                         body: JSON.stringify({
+                            name: `${card.name}`,
+                            link: `${card.link}`
+                          })
+                     }
+                    )
+                    .then((res) => {
+                        console.log(res);
+                        if(res.ok) return res.json();
+                    })
+    }
 }

@@ -39,6 +39,7 @@ const enableValidation = (config) => {
 enableValidation(config);
 
 function createCard(element) {
+    console.log(element);
     const cardElement = new Card(element, "#group__cards", handleCardClick);
     return cardElement;
 }
@@ -66,8 +67,11 @@ const popupProfileObject = new PopupWithForm({selector: '.popup_profile', handle
                                             }});
 
 const popupCardObject = new PopupWithForm({selector: '.popup_card-add', handleFormSubmit: (element) => {
-                                                                        const card = createCard(element);
-                                                                        initialCardsArray.addItem(card.getCard(), true);
+                                                                        api.addCard(element)
+                                                                            .then((res) => {
+                                                                                const card = createCard(res);
+                                                                                initialCardsArray.addItem(card.getCard(), true)
+                                                                            })
                                                                         popupCardObject.close();
                                                                     }});
 
@@ -76,7 +80,8 @@ const initialCardsArray = new Section({items: api.getCards()
                                                     const cardsArray = cards.map((item) => {
                                                         return {
                                                             name: item.name,
-                                                            link: item.link
+                                                            link: item.link,
+                                                            likes: item.likes
                                                         }
                                                     })
                                                     return cardsArray;
