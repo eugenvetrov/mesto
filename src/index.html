@@ -12,6 +12,7 @@
     </header>
     <main class="main">
     <section class="profile">
+        <div class="profile__avatar-edit"></div>
         <img src="<%=require('./images/jacques-yves-cousteau.jpeg')%>" class="profile__avatar" alt="аватар профиля">
         <h1 class="profile__info-name">Жак Ив Кусто</h1>
         <button class="profile__info-edit" type="button"></button>
@@ -27,7 +28,7 @@
                 <button class="group__like" type="button">
                     <div class="group__like-icon" alt="Отметить как понравившееся"></div>
                 </button>
-                <p class="group__like-number">6</p>
+                <p class="group__like-number"></p>
             </article>
         </template>
     </section>
@@ -62,7 +63,7 @@
             <form class="popup__form popup__form_profile-avatar" name="profile-avatar-form" autocomplete="off" novalidate>
                 <h2 class="popup__title">Обновить аватар</h2>
                 <input class="popup__text popup__text_profile-avatar"
-                     id="avatar-link"
+                     id="profile-avatar"
                      type="url"
                      name="avatarLink"
                      placeholder="Ссылка на аватар"

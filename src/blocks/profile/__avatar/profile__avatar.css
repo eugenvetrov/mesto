@@ -3,7 +3,7 @@
     width: 120px;
     min-height: 120px;
     object-fit: cover;
-    grid-area: avatar;
+    grid-area: avatar-edit;
 }
 
 @media screen and (max-width: 900px) {
