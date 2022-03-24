@@ -1,10 +1,11 @@
 export default class Card {
-    constructor(element, cardSelector, handleCardClick){
+    constructor(element, cardSelector, {handleCardClick, handleTrashIcon}){
         this._name = element.name;
         this._link = element.link;
         this._likes = element.likes;
         this._cardSelector = cardSelector;
         this._handleCardClick = handleCardClick;
+        this._handleTrashIcon = handleTrashIcon;
     }
 
     _makeCloneTemplateForCard() {
@@ -28,11 +29,6 @@ export default class Card {
         like.classList.toggle("group__like-icon_active");
     } 
 
-    _handleTrashIcon(event) {
-        const cardForDelete = event.target.closest(".group__rectangle");
-        cardForDelete.remove();
-    }
-
     _setEventListeners() {
 
         this._likeIcon = this._element.querySelector(".group__like-icon");
@@ -42,7 +38,9 @@ export default class Card {
         this._cardImage.addEventListener('click', () => {
             this._handleCardClick({name: this._name, link: this._link})
           });
-        this._trashIcon.addEventListener("click", this._handleTrashIcon);
+        this._trashIcon.addEventListener("click", () => {
+            this._handleTrashIcon();
+        });
     }
 
     getCard(){

@@ -6,6 +6,7 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
+import PopupWithConfirmation from '../components/PopupWithConfirmation';
 
 /* Переменные для базовых действий с попапами */
 const editButton = document.querySelector(".profile__info-edit");
@@ -40,12 +41,16 @@ enableValidation(config);
 
 function createCard(element) {
     console.log(element);
-    const cardElement = new Card(element, "#group__cards", handleCardClick);
+    const cardElement = new Card(element, "#group__cards", { handleCardClick, handleTrashIcon });
     return cardElement;
 }
 
 const handleCardClick = (data) => {
     popupFullImageObject.open(data)
+}
+
+const handleTrashIcon = () => {
+    popupCardDeleteConfirmation.open()
 }
 
 const api = new Api('https://mesto.nomoreparties.co');
@@ -73,7 +78,13 @@ const popupCardObject = new PopupWithForm({selector: '.popup_card-add', handleFo
                                                                                 initialCardsArray.addItem(card.getCard(), true)
                                                                             })
                                                                         popupCardObject.close();
-                                                                    }});
+                                                                        }                                                              
+                                                                    });
+
+const popupCardDeleteConfirmation = new PopupWithConfirmation({selector: '.popup_delete-card', handleFormSubmit: () => {
+                                                                   
+                                                                   popupCardDeleteConfirmation.close();
+                                             }})
 
 const initialCardsArray = new Section({items: api.getCards()
                                                 .then((cards) => {
@@ -97,6 +108,7 @@ initialCardsArray.renderItems();
 popupProfileObject.setEventListeners();
 popupCardObject.setEventListeners();
 popupFullImageObject.setEventListeners();
+popupCardDeleteConfirmation.setEventListeners();
 editButton.addEventListener('click', () => {
     formValidators['profile-form'].resetValidation();
     const {name, about} = user.getUserInfo()
