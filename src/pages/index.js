@@ -40,8 +40,7 @@ const enableValidation = (config) => {
 enableValidation(config);
 
 function createCard(element) {
-    console.log(element);
-    const cardElement = new Card(element, "#group__cards", { handleCardClick, handleTrashIcon });
+    const cardElement = new Card(element, "#group__cards", user._id, { handleCardClick, handleTrashIcon });
     return cardElement;
 }
 
@@ -49,24 +48,28 @@ const handleCardClick = (data) => {
     popupFullImageObject.open(data)
 }
 
-const handleTrashIcon = () => {
-    popupCardDeleteConfirmation.open()
+const handleTrashIcon = (card, cardForDelete) => {
+    popupCardDeleteConfirmation.open(card, cardForDelete)
 }
 
 const api = new Api('https://mesto.nomoreparties.co');
 
-const user = new UserInfo({nameSelector: '.profile__info-name', selfInfoSelector: '.profile__info-description'});
+const user = new UserInfo({nameSelector: '.profile__info-name',
+                           selfInfoSelector: '.profile__info-description'});
 
 api.getUserInfo()
-    .then((userInfo) => {
-        user.setUserInfo({name: userInfo.name, about: userInfo.about})
+    .then((data) => {
+        user.setUserInfo(data);
     })
 
 const popupProfileObject = new PopupWithForm({selector: '.popup_profile', handleFormSubmit: (data) => {
                                                 api.setUserInfo(data.name, data.about)
                                                 .then(() => api.getUserInfo())
                                                 .then((userInfo) => {
-                                                    user.setUserInfo({name: userInfo.name, about: userInfo.about})
+                                                    const data = {name: userInfo.name,
+                                                                  about: userInfo.about,
+                                                                  _id: userInfo._id};
+                                                    user.setUserInfo(data);
                                                 })
                                                 popupProfileObject.close();
                                             }});
@@ -81,20 +84,16 @@ const popupCardObject = new PopupWithForm({selector: '.popup_card-add', handleFo
                                                                         }                                                              
                                                                     });
 
-const popupCardDeleteConfirmation = new PopupWithConfirmation({selector: '.popup_delete-card', handleFormSubmit: () => {
-                                                                   
+const popupCardDeleteConfirmation = new PopupWithConfirmation({selector: '.popup_delete-card',
+                                                               handleFormSubmit: (card, cardForDelete) => {
+                                                                   api.deleteCard(card)
+                                                                   cardForDelete.remove();
                                                                    popupCardDeleteConfirmation.close();
                                              }})
 
 const initialCardsArray = new Section({items: api.getCards()
                                                 .then((cards) => {
-                                                    const cardsArray = cards.map((item) => {
-                                                        return {
-                                                            name: item.name,
-                                                            link: item.link,
-                                                            likes: item.likes
-                                                        }
-                                                    })
+                                                    const cardsArray = cards.map(item => item)
                                                     return cardsArray;
                                                 }),
                                        renderer: (element) => { 

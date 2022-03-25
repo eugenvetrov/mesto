@@ -64,7 +64,21 @@ export default class Api {
                      }
                     )
                     .then((res) => {
-                        console.log(res);
+                        if(res.ok) return res.json();
+                    })
+    }
+
+    deleteCard(card) {
+        console.log(card);
+        return fetch(`${this._url}/cards/${card._id}`,
+                     {
+                         method: 'DELETE',
+                         headers: {
+                            authorization: this._headerAuth,
+                         }
+                     }
+                    )
+                    .then((res) => {
                         if(res.ok) return res.json();
                     })
     }
