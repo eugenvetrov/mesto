@@ -9,9 +9,13 @@ export default class Api {
       headers: {
         authorization: this._headerAuth,
       },
-    }).then((res) => {
-      if (res.ok) return res.json();
-    });
+    })
+      .then((res) => {
+        if (res.ok) return res.json();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   setUserInfo(name, about) {
@@ -25,9 +29,13 @@ export default class Api {
         name: `${name}`,
         about: `${about}`,
       }),
-    }).then((res) => {
-      if (res.ok) return res.json();
-    });
+    })
+      .then((res) => {
+        if (res.ok) return res.json();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   getCards() {
@@ -35,9 +43,13 @@ export default class Api {
       headers: {
         authorization: this._headerAuth,
       },
-    }).then((res) => {
-      if (res.ok) return res.json();
-    });
+    })
+      .then((res) => {
+        if (res.ok) return res.json();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   addCard(card) {
@@ -51,9 +63,13 @@ export default class Api {
         name: `${card.name}`,
         link: `${card.link}`,
       }),
-    }).then((res) => {
-      if (res.ok) return res.json();
-    });
+    })
+      .then((res) => {
+        if (res.ok) return res.json();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   deleteCard(card) {
@@ -62,9 +78,13 @@ export default class Api {
       headers: {
         authorization: this._headerAuth,
       },
-    }).then((res) => {
-      if (res.ok) return res.json();
-    });
+    })
+      .then((res) => {
+        if (res.ok) return res.json();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   putLikeCard(cardId) {
@@ -73,9 +93,13 @@ export default class Api {
       headers: {
         authorization: this._headerAuth,
       },
-    }).then((res) => {
-      if (res.ok) return res.json();
-    });
+    })
+      .then((res) => {
+        if (res.ok) return res.json();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   deleteLikeCard(cardId) {
@@ -84,8 +108,29 @@ export default class Api {
       headers: {
         authorization: this._headerAuth,
       },
-    }).then((res) => {
-      if (res.ok) return res.json();
-    });
+    })
+      .then((res) => {
+        if (res.ok) return res.json();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  changeAvatar(link) {
+    return fetch(`${this._url}/users/me/avatar`, {
+      method: "PATCH",
+      headers: {
+        authorization: this._headerAuth,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ avatar: `${link}` }),
+    })
+      .then((res) => {
+        if (res.ok) return res.json();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 }
