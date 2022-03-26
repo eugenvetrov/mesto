@@ -13,8 +13,6 @@ import {
   editButton,
   cardAddButton,
   avatarEditButton,
-  popupEditProfileName,
-  popupEditProfileDescription,
 } from "../utils/constants.js";
 
 const formValidators = {};
@@ -89,11 +87,11 @@ const popupProfileObject = new PopupWithForm({
       .then((userInfo) => {
         user.setUserInfo(userInfo);
       })
-      .then(popupProfileObject.close())
+      .then(() => popupProfileObject.close())
       .catch((err) => {
         console.log(err);
       })
-      .finally(popupProfileObject.setSubmitText("Сохранить"));
+      .finally(() => popupProfileObject.setSubmitText("Сохранить"));
   },
 });
 
@@ -106,11 +104,11 @@ const popupCardObject = new PopupWithForm({
       .then((res) => {
         initialCardsArray.addItem(res, true);
       })
-      .then(popupCardObject.close())
+      .then(() => popupCardObject.close())
       .catch((err) => {
         console.log(err);
       })
-      .finally(popupCardObject.setSubmitText("Создать"));
+      .finally(() => popupCardObject.setSubmitText("Создать"));
   },
 });
 
@@ -119,8 +117,8 @@ const popupCardDeleteConfirmation = new PopupWithConfirmation({
   handleFormSubmit: (card, cardForDelete) => {
     api
       .deleteCard(card)
-      .then(cardForDelete.remove())
-      .then(popupCardDeleteConfirmation.close())
+      .then(() => cardForDelete.remove())
+      .then(() => popupCardDeleteConfirmation.close())
       .catch((err) => {
         console.log(err);
       });
@@ -136,11 +134,11 @@ const popupAvatarEdit = new PopupWithForm({
       .then((userInfo) => {
         user.setUserInfo(userInfo);
       })
-      .then(popupAvatarEdit.close())
+      .then(() => popupAvatarEdit.close())
       .catch((err) => {
         console.log(err);
       })
-      .finally(popupAvatarEdit.setSubmitText("Сохранить"));
+      .finally(() => popupAvatarEdit.setSubmitText("Сохранить"));
   },
 });
 
@@ -159,7 +157,7 @@ const initialCardsArray = new Section(
             : handlePutLikeCard(cardElement);
         },
       });
-      return cardElement;
+      return cardElement.getCard();
     },
   },
   ".group"

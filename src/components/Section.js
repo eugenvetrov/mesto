@@ -9,8 +9,7 @@ export default class Section {
   }
 
   addItem(item, toBegin) {
-    const element = this._renderer(item);
-    const elementForRender = element.getCard(element);
+    const elementForRender = this._renderer(item);
     if (toBegin) this._container.prepend(elementForRender);
     this._container.append(elementForRender);
   }
