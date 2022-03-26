@@ -47,7 +47,6 @@ export default class FormValidator {
     this._toggleButton();
     const submitFormHandler = (event) => {
       event.preventDefault();
-      this._disableSubmit();
     };
     this._form.addEventListener("submit", submitFormHandler);
     this._inputs = this._form.querySelectorAll(this._inputSelector);

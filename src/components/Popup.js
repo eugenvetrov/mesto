@@ -2,7 +2,6 @@ export default class Popup {
   constructor(selector) {
     this._element = document.querySelector(selector);
     this._handleEscClose = this._handleEscClose.bind(this);
-    this._submitButton = this._element.querySelector(".popup__submit");
   }
 
   _handleEscClose(event) {
@@ -30,9 +29,5 @@ export default class Popup {
   close() {
     document.removeEventListener("keydown", this._handleEscClose);
     this._element.classList.remove("popup_opened");
-  }
-
-  setSubmitText(text) {
-    this._submitButton.value = text;
   }
 }

@@ -1,136 +1,75 @@
 export default class Api {
-  constructor(url) {
-    this._url = `${url}/v1/cohort-37`;
-    this._headerAuth = "bcc22094-6aca-4aef-ba1e-307f93bc116d";
+  constructor({ baseUrl, headers }) {
+    this._baseUrl = baseUrl;
+    this._headeres = headers;
+  }
+
+  _checkResponse(res) {
+    if (res.ok) {
+      return res.json();
+    }
   }
 
   getUserInfo() {
-    return fetch(`${this._url}/users/me`, {
-      headers: {
-        authorization: this._headerAuth,
-      },
-    })
-      .then((res) => {
-        if (res.ok) return res.json();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    return fetch(`${this._baseUrl}/users/me`, {
+      headers: this._headeres,
+    }).then(this._checkResponse);
   }
 
   setUserInfo(name, about) {
-    return fetch(`${this._url}/users/me`, {
+    return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
-      headers: {
-        authorization: this._headerAuth,
-        "Content-Type": "application/json",
-      },
+      headers: this._headeres,
       body: JSON.stringify({
         name: `${name}`,
         about: `${about}`,
       }),
-    })
-      .then((res) => {
-        if (res.ok) return res.json();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then(this._checkResponse);
   }
 
   getCards() {
-    return fetch(`${this._url}/cards`, {
-      headers: {
-        authorization: this._headerAuth,
-      },
-    })
-      .then((res) => {
-        if (res.ok) return res.json();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    return fetch(`${this._baseUrl}/cards`, {
+      headers: this._headeres,
+    }).then(this._checkResponse);
   }
 
   addCard(card) {
-    return fetch(`${this._url}/cards`, {
+    return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
-      headers: {
-        authorization: this._headerAuth,
-        "Content-Type": "application/json",
-      },
+      headers: this._headeres,
       body: JSON.stringify({
         name: `${card.name}`,
         link: `${card.link}`,
       }),
-    })
-      .then((res) => {
-        if (res.ok) return res.json();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then(this._checkResponse);
   }
 
   deleteCard(card) {
-    return fetch(`${this._url}/cards/${card._id}`, {
+    return fetch(`${this._baseUrl}/cards/${card._id}`, {
       method: "DELETE",
-      headers: {
-        authorization: this._headerAuth,
-      },
-    })
-      .then((res) => {
-        if (res.ok) return res.json();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      headers: this._headeres,
+    }).then(this._checkResponse);
   }
 
   putLikeCard(cardId) {
-    return fetch(`${this._url}/cards/${cardId}/likes`, {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "PUT",
-      headers: {
-        authorization: this._headerAuth,
-      },
-    })
-      .then((res) => {
-        if (res.ok) return res.json();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      headers: this._headeres,
+    }).then(this._checkResponse);
   }
 
   deleteLikeCard(cardId) {
-    return fetch(`${this._url}/cards/${cardId}/likes`, {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "DELETE",
-      headers: {
-        authorization: this._headerAuth,
-      },
-    })
-      .then((res) => {
-        if (res.ok) return res.json();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      headers: this._headeres,
+    }).then(this._checkResponse);
   }
 
   changeAvatar(link) {
-    return fetch(`${this._url}/users/me/avatar`, {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
-      headers: {
-        authorization: this._headerAuth,
-        "Content-Type": "application/json",
-      },
+      headers: this._headeres,
       body: JSON.stringify({ avatar: `${link}` }),
-    })
-      .then((res) => {
-        if (res.ok) return res.json();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then(this._checkResponse);
   }
 }
