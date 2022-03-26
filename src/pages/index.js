@@ -89,11 +89,11 @@ const popupProfileObject = new PopupWithForm({
       .then((userInfo) => {
         user.setUserInfo(userInfo);
       })
+      .then(popupProfileObject.close())
       .catch((err) => {
         console.log(err);
-      });
-    popupProfileObject.close();
-    popupProfileObject.setSubmitText("Сохранить");
+      })
+      .finally(popupProfileObject.setSubmitText("Сохранить"));
   },
 });
 
@@ -106,22 +106,24 @@ const popupCardObject = new PopupWithForm({
       .then((res) => {
         initialCardsArray.addItem(res, true);
       })
+      .then(popupCardObject.close())
       .catch((err) => {
         console.log(err);
-      });
-    popupCardObject.close();
-    popupCardObject.setSubmitText("Создать");
+      })
+      .finally(popupCardObject.setSubmitText("Создать"));
   },
 });
 
 const popupCardDeleteConfirmation = new PopupWithConfirmation({
   selector: ".popup_delete-card",
   handleFormSubmit: (card, cardForDelete) => {
-    api.deleteCard(card).catch((err) => {
-      console.log(err);
-    });
-    cardForDelete.remove();
-    popupCardDeleteConfirmation.close();
+    api
+      .deleteCard(card)
+      .then(cardForDelete.remove())
+      .then(popupCardDeleteConfirmation.close())
+      .catch((err) => {
+        console.log(err);
+      });
   },
 });
 
@@ -131,15 +133,14 @@ const popupAvatarEdit = new PopupWithForm({
     popupAvatarEdit.setSubmitText("Сохранение...");
     api
       .changeAvatar(link.avatar)
-      .then(() => api.getUserInfo())
       .then((userInfo) => {
         user.setUserInfo(userInfo);
       })
+      .then(popupAvatarEdit.close())
       .catch((err) => {
         console.log(err);
-      });
-    popupAvatarEdit.close();
-    popupAvatarEdit.setSubmitText("Сохранить");
+      })
+      .finally(popupAvatarEdit.setSubmitText("Сохранить"));
   },
 });
 
@@ -180,9 +181,8 @@ popupCardDeleteConfirmation.setEventListeners();
 popupAvatarEdit.setEventListeners();
 editButton.addEventListener("click", () => {
   formValidators["profile-form"].resetValidation();
-  const { name, about } = user.getUserInfo();
-  popupEditProfileName.value = name;
-  popupEditProfileDescription.value = about;
+  const userInfo = user.getUserInfo();
+  popupProfileObject.setInputValues(userInfo);
   popupProfileObject.open();
 });
 cardAddButton.addEventListener("click", () => {
