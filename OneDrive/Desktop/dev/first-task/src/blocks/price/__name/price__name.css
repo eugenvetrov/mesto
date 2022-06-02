@@ -1,0 +1,16 @@
+.price__name {
+    color: #000;
+    border-radius: 50% 50%;
+    font-weight: 700;
+    line-height: 26px;
+}
+
+@media screen and (max-width: 1019px) {
+    .price__name{
+        color: #333;
+        width: 46px;
+        max-height: 46px;
+        background-color: #d4eaff;
+        font-size: 30px;
+    }
+}

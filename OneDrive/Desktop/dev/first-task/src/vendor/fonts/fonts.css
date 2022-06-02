@@ -1,0 +1,15 @@
+@font-face {
+    font-family: "Proxima Nova Condensed", sans-serif;
+    font-weight: 700;
+    font-style: bold;
+    font-display: swap;
+    src: url("./Mark Simonson  Proxima Nova Extra Condensed Bold TheFontsMaster.com.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "Proxima Nova Condensed", sans-serif;
+    font-weight: 800;
+    font-style: bold;
+    font-display: swap;
+    src: url("./Mark Simonson  Proxima Nova Extra Condensed Extrabold TheFontsMaster.com.woff") format("woff");
+  }
